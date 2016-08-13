@@ -1,0 +1,108 @@
+$m-barChart_axis-y_width ?= 40px;
+$m-barChart_axis-x_height ?= 30px;
+$m-barChart_axis_border ?= #ccc;
+$m-barChart_axis-y_offset ?= 10px;
+$m-barChart_axis-x_offset ?= 6px;
+$m-barChart_line_border ?= #eee;
+$m-barChart_line_offset ?= 6px;
+$m-barChart_bar_width = 60px;
+
+.m-barChart {
+    $box-sizing: border-box;
+    width: 800px;
+    height: 400px;
+    padding: 15px;
+
+    .barChart_inner {
+        height: 100%;
+        position: relative;
+    }
+
+    .barChart_grid, .barChart_layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: $m-barChart_axis-y_width;
+        bottom: $m-barChart_axis-x_height;
+        font-size: 0;
+    }
+
+    .barChart_line {
+        position: absolute;
+    }
+
+    .barChart_line-x {
+        left: -$m-barChart_line_offset;
+        right: -1px;
+        border-top: 1px solid $m-barChart_line_border;
+    }
+
+    .barChart_line-y {
+        top: -1px;
+        bottom: -$m-barChart_line_offset;
+        border-left: 1px solid $m-barChart_line_border;
+    }
+
+    .barChart_axis {
+        position: absolute;
+        z-index: 2;
+    }
+
+    .barChart_axis-x {
+        left: $m-barChart_axis-y_width;
+        right: -1px;
+        bottom: 0;
+        height: $m-barChart_axis-x_height;
+        border-top: 1px solid $m-barChart_axis_border;
+    }
+
+    .barChart_axis-y {
+        left: 0;
+        top: -1px;
+        bottom: $m-barChart_axis-x_height;
+        width: $m-barChart_axis-y_width;
+        border-right: 1px solid $m-barChart_axis_border;
+    }
+
+    .barChart_label {
+        @extend .f-toe;
+        position: absolute;
+        font-size: 12px;
+    }
+
+    .barChart_label-x {
+        top: $m-barChart_axis-x_offset;
+        bottom: 0;
+        // $transform: translateX(-50%);
+        text-align: center;
+    }
+
+    .barChart_label-y {
+        left: 0;
+        right: $m-barChart_axis-y_offset;
+        $transform: translateY(50%);
+        text-align: right;
+    }
+
+    .barChart_layer {
+        z-index: 10;
+    }
+
+    .barChart_piece {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    .barChart_bar {
+        position: absolute;
+        $box-sizing: border-box;
+        bottom: 0;
+        width: $m-barChart_bar_width;
+        left: 50%;
+        margin-left: -$m-barChart_bar_width / 2;
+        background: rgba(0,153,255,0.3);
+        border: 2px solid rgba(0,153,255,0.6);
+        border-bottom: none;
+    }
+}

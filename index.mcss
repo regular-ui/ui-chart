@@ -1,0 +1,2 @@
+@import './chart/index.mcss';
+@import './barChart/index.mcss';
