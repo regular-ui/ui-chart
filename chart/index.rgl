@@ -1,4 +1,6 @@
-<div class="m-chart {class}" z-dis={disabled} r-hide={!visible}>
-    <span class="chart_message">{message}</span>
-    <input class="u-input" r-model={message} readonly={readonly} disabled={disabled} on-input={this._onInput($event)} />
+<div class="m-chart {class}" z-dis={disabled} r-hide={!visible} style="width: {width}; height: {height};">
+    <div class="chart_title"></div>
+    <div class="chart_inner">
+        {#inc this.$body}
+    </div>
 </div>

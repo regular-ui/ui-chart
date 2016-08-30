@@ -1,5 +1,6 @@
 import { Component } from 'rgui-ui-base';
 import template from './index.rgl';
+import _ from '../util';
 
 /**
  * @class Chart
@@ -19,30 +20,51 @@ const BarChart = Component.extend({
      */
     config() {
         this.data = Object.assign({
-            data: [
-                { week: '星期一', number: 150 },
-                { week: '星期二', number: 300 },
-                { week: '星期三', number: 200 },
-                { week: '星期四', number: 0 },
-                { week: '星期五', number: 74 },
-                { week: '星期六', number: 532 },
-                { week: '星期日', number: 420 },
-            ],
+            data: [],
             xAxis: {
                 key: 'week',
             },
             yAxis: {
-                min: 0,
-                max: 800,
+                min: 'auto',
+                max: 'auto',
             },
             series: [{
                 name: 'Select',
                 key: 'number',
             }],
             _xAxis: [],
-            _yAxis: [100, 200, 300, 400, 500, 600, 700, 800],
+            _yAxis: {
+                data: [],
+            },
         }, this.data);
         this.supr();
+        this.watch();
+    },
+    watch() {
+        // this.$watch('data', (newValue, oldValue) {
+        //     this.data.data.ser
+        // });
+    },
+    init() {
+        const _yAxis = this.data._yAxis;
+        _yAxis.min = Math.min.apply(null, this.data.series.map((sery) =>
+            Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
+        ));
+        _yAxis.max = Math.max.apply(null, this.data.series.map((sery) =>
+            Math.max.apply(null, this.data.data.map((item) => item[sery.key]))
+        ));
+
+        const COUNT = 8;
+        const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/COUNT);
+        _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
+        _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
+
+        _yAxis.data = [];
+        for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
+            _yAxis.data.push(i);
+
+        console.log(_yAxis.data);
+        this.$update();
     },
 });
 

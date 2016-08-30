@@ -1,19 +1,11 @@
 .m-chart {
-    .chart_message {
-        @extend .f-toe;
-        box-sizing: border-box;
-        display: inline-block;
-        width: 160px;
-        height: 34px;
-        background: #f7f7f7;
-        $border: #ddd;
-        $border-radius: 3px;
-        padding: 6px 12px;
-        margin-bottom: 1px;
-        vertical-align: middle;
-    }
+    $box-sizing: border-box;
+    width: 800px;
+    height: 400px;
+    padding: 15px;
 
-    .u-input {
-        display: block;
+    .chart_inner {
+        height: 100%;
+        position: relative;
     }
 }
