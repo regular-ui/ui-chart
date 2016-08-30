@@ -19,7 +19,7 @@ const BarChart = Component.extend({
      * @override
      */
     config() {
-        this.data = Object.assign({
+        this.defaults({
             data: [],
             xAxis: {
                 key: 'week',
@@ -36,7 +36,7 @@ const BarChart = Component.extend({
             _yAxis: {
                 data: [],
             },
-        }, this.data);
+        });
         this.supr();
         this.watch();
     },

@@ -1,7 +1,7 @@
 {
   "name": "rgui-ui-chart",
   "description": "Regular UI - Chart, BarChart, LineChart, PieChart, DonutChart",
-  "version": "0.2.0",
+  "version": "0.2.0-alpha",
   "author": "Rainfore <rainforest92@126.com>",
   "main": "./index.js",
   "repository": "regular-ui/ui-chart",
@@ -11,8 +11,8 @@
   "keywords": ["regular", "ui", "rgui", "chart", "bar", "line", "pie", "donut"],
   "tags": ["regular", "ui", "rgui", "chart", "bar", "line", "pie", "donut"],
   "dependencies": {
-    "rgui-ui-base": "^0.2.0-alpha.4",
-    "rgui-ui-overlay": "^0.2.0-alpha.1"
+    "rgui-ui-base": "^0.2.0-alpha.5",
+    "rgui-ui-overlay": "^0.2.0-alpha.2"
   },
   "peerDependencies": {
     "regularjs": "^0.4.3"

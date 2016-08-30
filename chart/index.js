@@ -16,10 +16,10 @@ const Chart = Component.extend({
      * @override
      */
     config() {
-        this.data = Object.assign({
+        this.defaults({
             width: '100%',
             height: '400px',
-        }, this.data);
+        });
         this.supr();
     },
 });
