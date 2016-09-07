@@ -1,5 +1,6 @@
 import { Component } from 'rgui-ui-base';
-import template from './index.rgl';
+import contentTemplate from './index.rgl';
+import Chart from '../chart';
 import _ from '../util';
 
 /**
@@ -11,27 +12,27 @@ import _ from '../util';
  * @param {boolean=true}            options.data.visible             => 是否显示
  * @param {string=''}               options.data.class               => 补充class
  */
-const BarChart = Component.extend({
+const BarChart = Chart.extend({
     name: 'barChart',
-    template,
     /**
      * @protected
      * @override
      */
     config() {
         this.defaults({
+            // @inherited width: '100%',
+            // @inherited height: '400px',
+            // @inherited title: '',
+            // @inherited titleTemplate: '',
+            contentTemplate,
+            'class': 'm-barChart',
             data: [],
-            xAxis: {
-                key: 'week',
-            },
+            xAxis: {},
             yAxis: {
-                min: 'auto',
-                max: 'auto',
+                min: undefined,
+                max: undefined,
             },
-            series: [{
-                name: 'Select',
-                key: 'number',
-            }],
+            series: [],
             _xAxis: [],
             _yAxis: {
                 data: [],
@@ -39,20 +40,30 @@ const BarChart = Component.extend({
         });
         this.supr();
         this.watch();
+        this.draw();
     },
     watch() {
         // this.$watch('data', (newValue, oldValue) {
         //     this.data.data.ser
         // });
     },
-    init() {
+    draw() {
         const _yAxis = this.data._yAxis;
-        _yAxis.min = Math.min.apply(null, this.data.series.map((sery) =>
-            Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
-        ));
-        _yAxis.max = Math.max.apply(null, this.data.series.map((sery) =>
-            Math.max.apply(null, this.data.data.map((item) => item[sery.key]))
-        ));
+        if (this.data.yAxis.min !== undefined)
+            _yAxis.min = this.data.yAxis.min;
+        else {
+            _yAxis.min = Math.min.apply(null, this.data.series.map((sery) =>
+                Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
+            ));
+        }
+
+        if (this.data.yAxis.max !== undefined)
+            _yAxis.max = this.data.yAxis.max;
+        else {
+            _yAxis.max = Math.max.apply(null, this.data.series.map((sery) =>
+                Math.max.apply(null, this.data.data.map((item) => item[sery.key]))
+            ));
+        }
 
         const COUNT = 8;
         const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/COUNT);
@@ -63,7 +74,6 @@ const BarChart = Component.extend({
         for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
             _yAxis.data.push(i);
 
-        console.log(_yAxis.data);
         this.$update();
     },
 });

@@ -19,6 +19,9 @@ const Chart = Component.extend({
         this.defaults({
             width: '100%',
             height: '400px',
+            title: '',
+            titleTemplate: '',
+            contentTemplate: '',
         });
         this.supr();
     },

@@ -1,32 +1,28 @@
-<div class="m-chart m-barChart {class}" z-dis={disabled} r-hide={!visible}>
-    <div class="barChart_inner">
-        <div class="barChart_grid">
-            {#list data as item}
-            <div class="barChart_line barChart_line-y" style="left: {100*item_index/data.length}%;"></div>
-            {/list}
-            <div class="barChart_line barChart_line-y" style="left: 100%;"></div><!-- 柱状图在中间 -->
-            {#list _yAxis.data as yLabel}
-            <div class="barChart_line barChart_line-x" style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;"></div>
-            {/list}
-        </div>
-        <div class="barChart_axis barChart_axis-x">
-            {#list data as item}
-            <div class="barChart_label barChart_label-x" title={item[xAxis.key]} style="left: {100*item_index/data.length}%; width: {100/data.length}%;">{item[xAxis.key]}</div>
-            {/list}
-        </div>
-        <div class="barChart_axis barChart_axis-y">
-            {#list _yAxis.data as yLabel}
-            <div class="barChart_label barChart_label-y" title={yLabel} style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;">{yLabel}</div>
-            {/list}
-        </div>
-        <div class="barChart_layer">
-            {#list data as item}
-            <div class="barChart_piece" style="left: {100*item_index/data.length}%; width: {100/data.length}%;">
-                {#list series as sery}
-                <div class="barChart_bar" style="height: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%"></div>
-                {/list}
-            </div>
-            {/list}
-        </div>
+<div class="barChart_grid">
+    {#list data as item}
+    <div class="barChart_line barChart_line-y" style="left: {100*item_index/data.length}%;"></div>
+    {/list}
+    <div class="barChart_line barChart_line-y" style="left: 100%;"></div><!-- 柱状图在中间 -->
+    {#list _yAxis.data as yLabel}
+    <div class="barChart_line barChart_line-x" style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;"></div>
+    {/list}
+</div>
+<div class="barChart_axis barChart_axis-x">
+    {#list data as item}
+    <div class="barChart_label barChart_label-x" title={item[xAxis.key]} style="left: {100*item_index/data.length}%; width: {100/data.length}%;">{item[xAxis.key]}</div>
+    {/list}
+</div>
+<div class="barChart_axis barChart_axis-y">
+    {#list _yAxis.data as yLabel}
+    <div class="barChart_label barChart_label-y" title={yLabel} style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;">{yLabel}</div>
+    {/list}
+</div>
+<div class="barChart_layer">
+    {#list data as item}
+    <div class="barChart_piece" style="left: {100*item_index/data.length}%; width: {100/data.length}%;">
+        {#list series as sery}
+        <div class="barChart_bar" style="height: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%"></div>
+        {/list}
     </div>
+    {/list}
 </div>

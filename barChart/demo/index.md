@@ -6,7 +6,7 @@
 ```xml
 <barChart
     xAxis={@({ key: 'week' })}
-    yAxis={@({ min: 0, max: 'auto' })}
+    yAxis={@({ min: 0 })}
     series={@([{ key: 'number', name: 'Test' }])}
     data={data} />
 ```

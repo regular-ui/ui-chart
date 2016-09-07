@@ -1,6 +1,10 @@
 <div class="m-chart {class}" z-dis={disabled} r-hide={!visible} style="width: {width}; height: {height};">
-    <div class="chart_title"></div>
-    <div class="chart_inner">
-        {#inc this.$body}
+    {#if titleTemplate}
+        <div class="chart_tt">{#inc titleTemplate}</div>
+    {#elseif title}
+        <div class="chart_tt">{title}</div>
+    {/if}
+    <div class="chart_ct">
+        {#inc contentTemplate}
     </div>
 </div>
