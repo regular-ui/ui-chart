@@ -1,0 +1,146 @@
+$m-lineChart_axis-y_width ?= 40px;
+$m-lineChart_axis-x_height ?= 30px;
+$m-lineChart_axis_border ?= #ccc;
+$m-lineChart_axis-y_offset ?= 10px;
+$m-lineChart_axis-x_offset ?= 6px;
+$m-lineChart_line_border ?= #eee;
+$m-lineChart_line_offset ?= 6px;
+$m-lineChart_point_size ?= 9px;
+
+.m-lineChart {
+    .lineChart_grid, .lineChart_layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: $m-lineChart_axis-y_width;
+        bottom: $m-lineChart_axis-x_height;
+        font-size: 0;
+    }
+
+    .lineChart_line {
+        position: absolute;
+    }
+
+    .lineChart_line-x {
+        left: -$m-lineChart_line_offset;
+        right: -1px;
+        border-top: 1px solid $m-lineChart_line_border;
+    }
+
+    .lineChart_line-y {
+        top: -1px;
+        bottom: -$m-lineChart_line_offset;
+        border-left: 1px solid $m-lineChart_line_border;
+    }
+
+    .lineChart_axis {
+        position: absolute;
+        z-index: 2;
+    }
+
+    .lineChart_axis-x {
+        left: $m-lineChart_axis-y_width;
+        right: -1px;
+        bottom: 0;
+        height: $m-lineChart_axis-x_height;
+        border-top: 1px solid $m-lineChart_axis_border;
+    }
+
+    .lineChart_axis-y {
+        left: 0;
+        top: -1px;
+        bottom: $m-lineChart_axis-x_height;
+        width: $m-lineChart_axis-y_width;
+        border-right: 1px solid $m-lineChart_axis_border;
+    }
+
+    .lineChart_label {
+        @extend .f-toe;
+        position: absolute;
+        font-size: 12px;
+    }
+
+    .lineChart_label-x {
+        top: $m-lineChart_axis-x_offset;
+        bottom: 0;
+        // $transform: translateX(-50%);
+        // text-align: center;
+    }
+
+    .lineChart_label-y {
+        left: 0;
+        right: $m-lineChart_axis-y_offset;
+        $transform: translateY(50%);
+        text-align: right;
+    }
+
+    .lineChart_layer {
+        z-index: 10;
+
+        > svg {
+            $size: 100%;
+        }
+    }
+
+    .lineChart_point {
+        position: absolute;
+        $box-sizing: border-box;
+        $size: $m-lineChart_point_size;
+        background: white; // rgba(255,255,255,0.3);
+        border: 2px solid rgba(0,153,255,0.6);
+        $border-radius: 100%;
+        margin-bottom: - ($m-lineChart_point_size - 1) / 2;
+        margin-left: - ($m-lineChart_point_size - 1) / 2;
+
+        .u-tooltip {
+            display: none;
+            position: absolute;
+            z-index: 10;
+            left: 100%;
+            top: -13px;
+            margin-left: 7px;
+            white-space: nowrap;
+        }
+    }
+
+    .lineChart_point:hover {
+        .u-tooltip {
+            display: block;
+        }
+    }
+
+    .lineChart_line {
+        fill-opacity: 0;
+        stroke: rgba(0,153,255,0.6);
+        stroke-width: 2px;
+    }
+
+    .lineChart_area {
+        stroke-opacity: 0;
+        fill: rgba(0,153,255,0.3);
+    }
+
+    /*
+    .lineChart_bar {
+        position: absolute;
+        $box-sizing: border-box;
+        bottom: 0;
+        width: $m-lineChart_bar_width;
+        left: 50%;
+        margin-left: -$m-lineChart_bar_width / 2;
+        background: rgba(0,153,255,0.3);
+        border: 2px solid rgba(0,153,255,0.6);
+        border-bottom: none;
+
+        .u-tooltip {
+            display: none;
+            position: absolute;
+            z-index: 10;
+            left: 100%;
+            top: -2px;
+            margin-left: 5px;
+            white-space: nowrap;
+        }
+    }
+    */
+}

@@ -1,0 +1,40 @@
+<div class="lineChart_grid">
+    {#list data as item}
+    <div class="lineChart_line lineChart_line-y" style="left: {100*item_index/(data.length - 1)}%;"></div>
+    {/list}
+    {#list _yAxis.data as yLabel}
+    <div class="lineChart_line lineChart_line-x" style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;"></div>
+    {/list}
+</div>
+<div class="lineChart_axis lineChart_axis-x">
+    {#list data as item}
+    <div class="lineChart_label lineChart_label-x" title={item[xAxis.key]} style="left: {100*item_index/(data.length - 1)}%; width: {100/data.length}%;">
+        {#if xLabelTemplate}{#inc xLabelTemplate}{#else}{item[xAxis.key]}{/if}
+    </div>
+    {/list}
+</div>
+<div class="lineChart_axis lineChart_axis-y">
+    {#list _yAxis.data as yLabel}
+    <div class="lineChart_label lineChart_label-y" title={yLabel} style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;">{this.format(yLabel)}</div>
+    {/list}
+</div>
+<div class="lineChart_layer">
+    {#list series as sery}
+        <svg>
+            {#if fill}<path class="lineChart_area" d={this._getD(sery, 'area')} />{/if}
+            <path class="lineChart_line" d={this._getD(sery)} />
+        </svg>
+    {/list}
+</div>
+<div class="lineChart_layer">
+    {#list series as sery}
+        {#list data as item}
+        <div class="lineChart_point" style="left: {100*item_index/(data.length - 1)}%; bottom: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
+            <div class="lineChart_value">{this.format(item[sery.key])}</div>
+            <div class="u-tooltip u-tooltip-right-top">
+                {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.key}: {this.format(item[sery.key])}{/if}
+            </div>
+        </div>
+        {/list}
+    {/list}
+</div>

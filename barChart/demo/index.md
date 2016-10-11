@@ -18,7 +18,7 @@ let component = new RGUI.Component({
         data: [
             { week: '星期一', number: 150 },
             { week: '星期二', number: 300 },
-            { week: '星期三', number: 60 },
+            { week: '星期三', number: 0 },
             { week: '星期四', number: 200 },
             { week: '星期五', number: 74 },
             { week: '星期六', number: 532 },

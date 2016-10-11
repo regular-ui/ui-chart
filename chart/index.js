@@ -25,6 +25,14 @@ const Chart = Component.extend({
         });
         this.supr();
     },
+    /**
+     * @protected
+     */
+    draw() {
+        this.$emit('draw', {
+            sender: this,
+        });
+    },
 });
 
 export default Chart;

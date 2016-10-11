@@ -4,7 +4,7 @@ import Chart from '../chart';
 import _ from '../util';
 
 /**
- * @class BarChart
+ * @class LineChart
  * @extend Chart
  * @param {object}                  options.data                     =  绑定属性
  * @param {string='Hello World'}    options.data.message            <=> 消息
@@ -12,8 +12,8 @@ import _ from '../util';
  * @param {boolean=true}            options.data.visible             => 是否显示
  * @param {string=''}               options.data.class               => 补充class
  */
-const BarChart = Chart.extend({
-    name: 'barChart',
+const LineChart = Chart.extend({
+    name: 'lineChart',
     /**
      * @protected
      * @override
@@ -25,7 +25,9 @@ const BarChart = Chart.extend({
             // @inherited title: '',
             // @inherited titleTemplate: '',
             contentTemplate,
-            'class': 'm-barChart',
+            'class': 'm-lineChart',
+            smooth: false,
+            fill: false,
             data: undefined,
             xAxis: {},
             yAxis: {
@@ -77,9 +79,44 @@ const BarChart = Chart.extend({
 
         this.supr();
     },
+    _getD(sery, type) {
+        if (!this.data.data)
+            return;
+
+        const delta = 50;
+
+        const cmds = this.data.data.map((item, index) => {
+            const x = 670*index/6;
+            const y = 340*(1 - (item[sery.key] - this.data._yAxis.min)/this.data._yAxis.max);
+
+            if (!this.data.smooth)
+                return `L ${x},${y}`;
+            else {
+                const x2 = x - delta;
+                return `S ${x2},${y} ${x},${y}`;
+            }
+        });
+
+        if (!this.data.smooth)
+            cmds[0] = 'M ' + cmds[0].slice(2);
+        else {
+            const [x, y] = cmds[0].split(' ')[2].split(',');
+            const x1 = x + delta;
+            cmds[0] = `M ${x},${y}`;
+            cmds[1] = `C ${x1},${y} ` + cmds[1].slice(2);
+        }
+
+        if (type === 'area') {
+            cmds.push('V 340');
+            cmds.push('H 0');
+            cmds.push('Z');
+        }
+
+        return cmds.join(' ');
+    },
     format(value) {
         return value;
     },
 });
 
-export default BarChart;
+export default LineChart;
