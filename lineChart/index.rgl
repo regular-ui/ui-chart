@@ -29,12 +29,14 @@
 <div class="lineChart_layer">
     {#list series as sery}
         {#list data as item}
-        <div class="lineChart_point" style="left: {100*item_index/(data.length - 1)}%; bottom: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
-            <div class="lineChart_value">{this.format(item[sery.key])}</div>
-            <div class="u-tooltip u-tooltip-right-top">
-                {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.key}: {this.format(item[sery.key])}{/if}
+            {#if item[sery.key] !== undefined}
+            <div class="lineChart_point" style="left: {100*item_index/(data.length - 1)}%; bottom: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
+                <div class="lineChart_value">{this.format(item[sery.key])}</div>
+                <div class="u-tooltip u-tooltip-right-top">
+                    {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.key}: {this.format(item[sery.key])}{/if}
+                </div>
             </div>
-        </div>
+            {/if}
         {/list}
     {/list}
 </div>

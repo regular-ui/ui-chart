@@ -63,8 +63,8 @@ $m-lineChart_point_size ?= 9px;
     .lineChart_label-x {
         top: $m-lineChart_axis-x_offset;
         bottom: 0;
-        // $transform: translateX(-50%);
-        // text-align: center;
+        $transform: translateX(-50%);
+        text-align: center;
     }
 
     .lineChart_label-y {

@@ -41,6 +41,10 @@ const BarChart = Chart.extend({
         this.watch();
         this.draw();
     },
+    /**
+     * @protected
+     * @override
+     */
     watch() {
         // this.$watch('data', (newValue, oldValue) {
         //     this.data.data.ser

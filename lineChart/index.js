@@ -3,6 +3,8 @@ import contentTemplate from './index.rgl';
 import Chart from '../chart';
 import _ from '../util';
 
+const TICKES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 30, 40, 50, 100, 200, 500, 1000, 1];
+
 /**
  * @class LineChart
  * @extend Chart
@@ -24,8 +26,8 @@ const LineChart = Chart.extend({
             // @inherited height: '400px',
             // @inherited title: '',
             // @inherited titleTemplate: '',
-            _width: 800,
-            _height: 400,
+            _width: undefined,
+            _height: undefined,
             contentTemplate,
             'class': 'm-lineChart',
             smooth: false,
@@ -44,6 +46,10 @@ const LineChart = Chart.extend({
         this.supr();
         this.watch();
     },
+    /**
+     * @protected
+     * @override
+     */
     watch() {
         // this.$watch('data', (newValue, oldValue) {
         //     this.data.data.ser
@@ -55,75 +61,89 @@ const LineChart = Chart.extend({
      */
     init() {
         this.supr();
-        setTimeout(() => {
-            this.draw();
-            this.$update();
-        });
+        this.draw();
+    },
+    /**
+     * @private
+     */
+    _getSize() {
+        this.data._width = this.$refs.grid && this.$refs.grid.offsetWidth;
+        this.data._height = this.$refs.grid && this.$refs.grid.offsetHeight;
     },
     draw() {
         if (!this.data.data || !this.data.data.length)
             return;
 
-        this.data._width = this.$refs.grid.offsetWidth || 800;
-        this.data._height = this.$refs.grid.offsetHeight || 400;
-
         //
         // 确定横坐标
         //
-        const _xAxis = this.data._xAxis;
+        {
+            const _xAxis = this.data._xAxis;
+            _xAxis.count = this.data.xAxis.count || 12;
+            let pieceCount = this.data.data.length - 1;
+            let tick = 1;
+            while (!(pieceCount/tick <= _xAxis.count && pieceCount%tick === 0)) {
+                for (let i = 0; i < TICKES.length; i++) {
+                    tick = TICKES[i];
+                    if (pieceCount/tick <= _xAxis.count && pieceCount%tick === 0)
+                        break;
+                }
 
-        _xAxis.count = this.data.xAxis.count || 12;
-        if (this.data.data.length <= _xAxis.count)
-            _xAxis.data = this.data.data.map((item) => item[this.data.xAxis.key]);
-        else { // 目前只支持合数
-            const TICKES = [2, 3, 4, 5, 6, 7, 8, 10, 15, 20, 30, 40, 50, 100, 200, 500, 1000, 1];
-            let tick;
-            for (let i = 0; i < TICKES.length; i++) {
-                tick = TICKES[i];
-                if (this.data.data.length/tick <= _xAxis.count && this.data.data.length%tick === 0)
+                // 如果不能整除，则补充空数据
+                if (tick === 1) {
+                    this.data.data.push({});
+                    pieceCount++;
+                } else
                     break;
             }
+
+            _xAxis.tick = tick;
             _xAxis.data = [];
-            this.data.data.forEach((item, index) => {
-                if (index%tick === 0)
-                    _xAxis.data.push(item[this.data.xAxis.key]);
-            });
+            this.data.data.forEach((item, index) =>
+                index%tick === 0 && _xAxis.data.push(item[this.data.xAxis.key]));
         }
 
         //
         // 确定纵坐标
         //
-        const _yAxis = this.data._yAxis;
+        {
+            const _yAxis = this.data._yAxis;
 
-        // 如果没有设置最小值和最大值，则寻找
-        if (this.data.yAxis.min !== undefined)
-            _yAxis.min = this.data.yAxis.min;
-        else {
-            _yAxis.min = Math.min.apply(null, this.data.series.map((sery) =>
-                Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
-            ));
+            // 如果没有设置最小值和最大值，则寻找
+            if (this.data.yAxis.min !== undefined)
+                _yAxis.min = this.data.yAxis.min;
+            else {
+                _yAxis.min = Math.min.apply(null, this.data.series.map((sery) =>
+                    Math.min.apply(null, this.data.data.map((item) =>
+                        item[sery.key] !== undefined ? item[sery.key] : Infinity)))); // 支持空数据
+            }
+            if (this.data.yAxis.max !== undefined)
+                _yAxis.max = this.data.yAxis.max;
+            else {
+                _yAxis.max = Math.max.apply(null, this.data.series.map((sery) =>
+                    Math.max.apply(null, this.data.data.map((item) =>
+                        item[sery.key] !== undefined ? item[sery.key] : -Infinity)))); // 支持空数据
+            }
+
+            _yAxis.count = this.data.yAxis.count || 8;
+            const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
+            _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
+            _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
+
+            _yAxis.data = [];
+            for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
+                _yAxis.data.push(i);
         }
-        if (this.data.yAxis.max !== undefined)
-            _yAxis.max = this.data.yAxis.max;
-        else {
-            _yAxis.max = Math.max.apply(null, this.data.series.map((sery) =>
-                Math.max.apply(null, this.data.data.map((item) => item[sery.key]))
-            ));
-        }
 
-        _yAxis.count = this.data.yAxis.count || 8;
-        const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
-        _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
-        _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
-
-        _yAxis.data = [];
-        for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
-            _yAxis.data.push(i);
+        setTimeout(() => {
+            this._getSize();
+            this.$update();
+        });
 
         this.supr();
     },
     _getD(sery, type) {
-        if (!this.data.data || !this.data._xAxis.data.length || !this.data._yAxis.data.length)
+        if (!this.data._width || !this.data._height || !this.data.data || !this.data._xAxis.data.length || !this.data._yAxis.data.length)
             return;
 
         const width = this.data._width;
@@ -134,7 +154,9 @@ const LineChart = Chart.extend({
             const x = width*index/(this.data.data.length - 1);
             const y = height*(1 - (item[sery.key] - this.data._yAxis.min)/this.data._yAxis.max);
 
-            if (!this.data.smooth)
+            if (isNaN(y)) // 处理空数据的情况
+                return '';
+            else if (!this.data.smooth)
                 return `L ${x},${y}`;
             else {
                 const x2 = x - delta;
