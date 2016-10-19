@@ -7,7 +7,7 @@
 <lineChart
     xAxis={@({ key: 'week' })}
     yAxis={@({ min: 0 })}
-    series={@([{ key: 'number', name: 'Test' }])}
+    series={@([{ key: 'number' }])}
     data={data} />
 ```
 
@@ -36,7 +36,7 @@ let component = new RGUI.Component({
 <lineChart smooth
     xAxis={@({ key: 'week' })}
     yAxis={@({ min: 0 })}
-    series={@([{ key: 'number', name: 'Test' }])}
+    series={@([{ key: 'number' }])}
     data={data} />
 ```
 
@@ -65,7 +65,7 @@ let component = new RGUI.Component({
 <lineChart smooth fill
     xAxis={@({ key: 'week' })}
     yAxis={@({ min: 0 })}
-    series={@([{ key: 'number', name: 'Test' }])}
+    series={@([{ key: 'number' }])}
     data={data} />
 ```
 

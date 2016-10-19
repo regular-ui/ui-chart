@@ -22,6 +22,7 @@ const Chart = Component.extend({
             title: '',
             titleTemplate: '',
             contentTemplate: '',
+            data: undefined,
         });
         this.supr();
     },

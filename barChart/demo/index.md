@@ -7,7 +7,7 @@
 <barChart
     xAxis={@({ key: 'week' })}
     yAxis={@({ min: 0 })}
-    series={@([{ key: 'number', name: 'Test' }])}
+    series={@([{ key: 'number' }])}
     data={data} />
 ```
 

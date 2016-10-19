@@ -24,6 +24,8 @@ const LineChart = Chart.extend({
             // @inherited height: '400px',
             // @inherited title: '',
             // @inherited titleTemplate: '',
+            _width: 800,
+            _height: 400,
             contentTemplate,
             'class': 'm-lineChart',
             smooth: false,
@@ -35,23 +37,65 @@ const LineChart = Chart.extend({
                 max: undefined,
             },
             series: [],
-            _xAxis: [],
-            _yAxis: {
-                data: [],
-            },
+            _xAxis: { data: [] },
+            _yAxis: { data: [] },
             tooltipTemplate: '',
         });
         this.supr();
         this.watch();
-        this.draw();
     },
     watch() {
         // this.$watch('data', (newValue, oldValue) {
         //     this.data.data.ser
         // });
     },
+    /**
+     * @protected
+     * @override
+     */
+    init() {
+        this.supr();
+        setTimeout(() => {
+            this.draw();
+            this.$update();
+        });
+    },
     draw() {
+        if (!this.data.data || !this.data.data.length)
+            return;
+
+        this.data._width = this.$refs.grid.offsetWidth || 800;
+        this.data._height = this.$refs.grid.offsetHeight || 400;
+
+        //
+        // 确定横坐标
+        //
+        const _xAxis = this.data._xAxis;
+
+        _xAxis.count = this.data.xAxis.count || 12;
+        if (this.data.data.length <= _xAxis.count)
+            _xAxis.data = this.data.data.map((item) => item[this.data.xAxis.key]);
+        else { // 目前只支持合数
+            const TICKES = [2, 3, 4, 5, 6, 7, 8, 10, 15, 20, 30, 40, 50, 100, 200, 500, 1000, 1];
+            let tick;
+            for (let i = 0; i < TICKES.length; i++) {
+                tick = TICKES[i];
+                if (this.data.data.length/tick <= _xAxis.count && this.data.data.length%tick === 0)
+                    break;
+            }
+            _xAxis.data = [];
+            this.data.data.forEach((item, index) => {
+                if (index%tick === 0)
+                    _xAxis.data.push(item[this.data.xAxis.key]);
+            });
+        }
+
+        //
+        // 确定纵坐标
+        //
         const _yAxis = this.data._yAxis;
+
+        // 如果没有设置最小值和最大值，则寻找
         if (this.data.yAxis.min !== undefined)
             _yAxis.min = this.data.yAxis.min;
         else {
@@ -59,7 +103,6 @@ const LineChart = Chart.extend({
                 Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
             ));
         }
-
         if (this.data.yAxis.max !== undefined)
             _yAxis.max = this.data.yAxis.max;
         else {
@@ -68,8 +111,8 @@ const LineChart = Chart.extend({
             ));
         }
 
-        const COUNT = 8;
-        const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/COUNT) || 1;
+        _yAxis.count = this.data.yAxis.count || 8;
+        const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
         _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
         _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
 
@@ -80,14 +123,16 @@ const LineChart = Chart.extend({
         this.supr();
     },
     _getD(sery, type) {
-        if (!this.data.data)
+        if (!this.data.data || !this.data._xAxis.data.length || !this.data._yAxis.data.length)
             return;
 
-        const delta = 50;
+        const width = this.data._width;
+        const height = this.data._height;
+        const delta = width/(this.data.data.length - 1)/2;
 
         const cmds = this.data.data.map((item, index) => {
-            const x = 670*index/6;
-            const y = 340*(1 - (item[sery.key] - this.data._yAxis.min)/this.data._yAxis.max);
+            const x = width*index/(this.data.data.length - 1);
+            const y = height*(1 - (item[sery.key] - this.data._yAxis.min)/this.data._yAxis.max);
 
             if (!this.data.smooth)
                 return `L ${x},${y}`;
@@ -107,7 +152,7 @@ const LineChart = Chart.extend({
         }
 
         if (type === 'area') {
-            cmds.push('V 340');
+            cmds.push('V ' + height);
             cmds.push('H 0');
             cmds.push('Z');
         }

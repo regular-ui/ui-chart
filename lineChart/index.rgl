@@ -1,15 +1,15 @@
-<div class="lineChart_grid">
-    {#list data as item}
-    <div class="lineChart_line lineChart_line-y" style="left: {100*item_index/(data.length - 1)}%;"></div>
+<div class="lineChart_grid" ref="grid">
+    {#list _xAxis.data as xLabel}
+    <div class="lineChart_line lineChart_line-y" style="left: {100*xLabel_index/(_xAxis.data.length - 1)}%;"></div>
     {/list}
     {#list _yAxis.data as yLabel}
     <div class="lineChart_line lineChart_line-x" style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;"></div>
     {/list}
 </div>
 <div class="lineChart_axis lineChart_axis-x">
-    {#list data as item}
-    <div class="lineChart_label lineChart_label-x" title={item[xAxis.key]} style="left: {100*item_index/(data.length - 1)}%; width: {100/data.length}%;">
-        {#if xLabelTemplate}{#inc xLabelTemplate}{#else}{item[xAxis.key]}{/if}
+    {#list _xAxis.data as xLabel}
+    <div class="lineChart_label lineChart_label-x" title={xLabel} style="left: {100*xLabel_index/(_xAxis.data.length - 1)}%; width: {100/_xAxis.data.length}%;">
+        {#if xLabelTemplate}{#inc xLabelTemplate}{#else}{xLabel}{/if}
     </div>
     {/list}
 </div>

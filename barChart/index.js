@@ -33,10 +33,8 @@ const BarChart = Chart.extend({
                 max: undefined,
             },
             series: [],
-            _xAxis: [],
-            _yAxis: {
-                data: [],
-            },
+            _xAxis: { data: [] },
+            _yAxis: { data: [] },
             tooltipTemplate: '',
         });
         this.supr();
@@ -49,7 +47,24 @@ const BarChart = Chart.extend({
         // });
     },
     draw() {
+        if (!this.data.data || !this.data.data.length)
+            return;
+
+        //
+        // 确定横坐标
+        //
+        const _xAxis = this.data._xAxis;
+
+        _xAxis.count = this.data.xAxis.count || 12;
+        // 柱状图数据全部显示，暂不考虑收缩间隔的情况
+        _xAxis.data = this.data.data.map((item) => item[this.data.xAxis.key]);
+
+        //
+        // 确定纵坐标
+        //
         const _yAxis = this.data._yAxis;
+
+        // 如果没有设置最小值和最大值，则寻找
         if (this.data.yAxis.min !== undefined)
             _yAxis.min = this.data.yAxis.min;
         else {
@@ -57,7 +72,6 @@ const BarChart = Chart.extend({
                 Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
             ));
         }
-
         if (this.data.yAxis.max !== undefined)
             _yAxis.max = this.data.yAxis.max;
         else {
@@ -66,8 +80,8 @@ const BarChart = Chart.extend({
             ));
         }
 
-        const COUNT = 8;
-        const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/COUNT) || 1;
+        _yAxis.count = this.data.yAxis.count || 8;
+        const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
         _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
         _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
 

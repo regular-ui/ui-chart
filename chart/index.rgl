@@ -1,4 +1,4 @@
-<div class="m-chart {class}" z-dis={disabled} r-hide={!visible} style="width: {width}; height: {height};">
+<div class="m-chart {class}" r-class={{ 'z-loading': !data, 'z-empty': data && !data.length }} z-dis={disabled} r-hide={!visible} style="width: {width}; height: {height};">
     {#if titleTemplate}
         <div class="chart_tt">{#inc titleTemplate}</div>
     {#elseif title}
