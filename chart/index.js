@@ -18,11 +18,13 @@ const Chart = Component.extend({
     config() {
         this.defaults({
             width: '100%',
-            height: '400px',
+            height: '480px',
             title: '',
             titleTemplate: '',
             contentTemplate: '',
             data: undefined,
+            border: false,
+            legend: true,
         });
         this.supr();
     },

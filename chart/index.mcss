@@ -1,21 +1,50 @@
 $m-chart_padding = 15px;
 $m-chart_tt_height = 40px;
+$m-chart_legend_height = 30px;
 
 .m-chart {
     position: relative;
     $box-sizing: border-box;
     width: 800px;
-    height: 400px;
+    height: 500px;
     padding: 15px;
 
     .chart_tt {
         position: absolute;
         z-index: 5;
-        top: 0;
-        left: 0;
-        right: 0;
+        top: $m-chart_padding;
+        left: $m-chart_padding;
+        right: $m-chart_padding;
         $line-height: $m-chart_tt_height;
+        font-size: 16px;
         text-align: center;
+    }
+
+    .chart_legend {
+        position: absolute;
+        bottom: $m-chart_padding;
+        $line-height: $m-chart_legend_height;
+        left: $m-chart_padding;
+        right: $m-chart_padding;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .chart_legend_item {
+        display: inline-block;
+
+        &:before {
+            display: inline-block;
+            content: '';
+            $size: 10px;
+            background: rgba(0,153,255,0.6);
+            vertical-align: text-bottom;
+            margin-right: 4px;
+        }
+    }
+
+    .chart_legend_item + .chart_legend_item {
+        margin-left: 2em;
     }
 
     .chart_ct {
@@ -26,7 +55,15 @@ $m-chart_tt_height = 40px;
         bottom: $m-chart_padding;
     }
 
-    .chart_tt + .chart_ct {
-        top: $m-chart_tt_height;
+    .chart_tt ~ .chart_ct {
+        top: $m-chart_padding + $m-chart_tt_height;
     }
+
+    .chart_legend ~ .chart_ct {
+        bottom: $m-chart_padding + $m-chart_legend_height;
+    }
+}
+
+.m-chart-border {
+    $border: #eee;
 }

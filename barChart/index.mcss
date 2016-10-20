@@ -10,10 +10,10 @@ $m-barChart_bar_width ?= 60px;
 .m-barChart {
     .barChart_grid, .barChart_layer {
         position: absolute;
-        top: 0;
-        right: 0;
-        left: $m-barChart_axis-y_width;
         bottom: $m-barChart_axis-x_height;
+        top: $m-barChart_axis-x_height / 2;
+        left: $m-barChart_axis-y_width;
+        right: $m-barChart_axis-y_width / 2;
         font-size: 0;
     }
 
@@ -40,7 +40,7 @@ $m-barChart_bar_width ?= 60px;
 
     .barChart_axis-x {
         left: $m-barChart_axis-y_width;
-        right: -1px;
+        right: $m-barChart_axis-y_width / 2 - 1px;
         bottom: 0;
         height: $m-barChart_axis-x_height;
         border-top: 1px solid $m-barChart_axis_border;
@@ -48,7 +48,7 @@ $m-barChart_bar_width ?= 60px;
 
     .barChart_axis-y {
         left: 0;
-        top: -1px;
+        top: $m-barChart_axis-x_height / 2 - 1px;
         bottom: $m-barChart_axis-x_height;
         width: $m-barChart_axis-y_width;
         border-right: 1px solid $m-barChart_axis_border;
@@ -71,6 +71,18 @@ $m-barChart_bar_width ?= 60px;
         left: 0;
         right: $m-barChart_axis-y_offset;
         $transform: translateY(50%);
+        text-align: right;
+    }
+
+    .barChart_label-xName {
+        right: -50px;
+        top: 6px;
+        bottom: 0;
+    }
+
+    .barChart_label-yName {
+        right: 10px;
+        top: -30px;
         text-align: right;
     }
 

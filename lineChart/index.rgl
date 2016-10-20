@@ -9,14 +9,17 @@
 <div class="lineChart_axis lineChart_axis-x">
     {#list _xAxis.data as xLabel}
     <div class="lineChart_label lineChart_label-x" title={xLabel} style="left: {100*xLabel_index/(_xAxis.data.length - 1)}%; width: {100/_xAxis.data.length}%;">
+        <!-- 不建议在这里加模板 -->
         {#if xLabelTemplate}{#inc xLabelTemplate}{#else}{xLabel}{/if}
     </div>
     {/list}
+    <div class="lineChart_label lineChart_label-xName">{xAxis.name}</div>
 </div>
 <div class="lineChart_axis lineChart_axis-y">
     {#list _yAxis.data as yLabel}
     <div class="lineChart_label lineChart_label-y" title={yLabel} style="bottom: {100*yLabel_index/(_yAxis.data.length - 1)}%;">{this.format(yLabel)}</div>
     {/list}
+    <div class="lineChart_label lineChart_label-yName">{yAxis.name}</div>
 </div>
 <div class="lineChart_layer">
     {#list series as sery}
@@ -33,7 +36,7 @@
             <div class="lineChart_point" style="left: {100*item_index/(data.length - 1)}%; bottom: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
                 <div class="lineChart_value">{this.format(item[sery.key])}</div>
                 <div class="u-tooltip u-tooltip-right-top">
-                    {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.key}: {this.format(item[sery.key])}{/if}
+                    {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.name || sery.key}: {this.format(item[sery.key])}{/if}
                 </div>
             </div>
             {/if}

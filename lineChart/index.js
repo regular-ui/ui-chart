@@ -23,7 +23,7 @@ const LineChart = Chart.extend({
     config() {
         this.defaults({
             // @inherited width: '100%',
-            // @inherited height: '400px',
+            // @inherited height: '480px',
             // @inherited title: '',
             // @inherited titleTemplate: '',
             _width: undefined,
@@ -80,19 +80,19 @@ const LineChart = Chart.extend({
         {
             const _xAxis = this.data._xAxis;
             _xAxis.count = this.data.xAxis.count || 12;
-            let pieceCount = this.data.data.length - 1;
+            let pieceCounts = this.data.data.length - 1;
             let tick = 1;
-            while (!(pieceCount/tick <= _xAxis.count && pieceCount%tick === 0)) {
+            while (!(pieceCounts/tick <= _xAxis.count && pieceCounts%tick === 0)) {
                 for (let i = 0; i < TICKES.length; i++) {
                     tick = TICKES[i];
-                    if (pieceCount/tick <= _xAxis.count && pieceCount%tick === 0)
+                    if (pieceCounts/tick <= _xAxis.count && pieceCounts%tick === 0)
                         break;
                 }
 
                 // 如果不能整除，则补充空数据
                 if (tick === 1) {
                     this.data.data.push({});
-                    pieceCount++;
+                    pieceCounts++;
                 } else
                     break;
             }
@@ -129,6 +129,10 @@ const LineChart = Chart.extend({
             const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
             _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
             _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
+
+            // 如果最小值和最大值相等，则强行区分
+            if (_yAxis.min === _yAxis.max)
+                _yAxis.max = _yAxis.min + 1;
 
             _yAxis.data = [];
             for (let i = _yAxis.min; i <= _yAxis.max; i += tick)

@@ -10,10 +10,10 @@ $m-lineChart_point_size ?= 9px;
 .m-lineChart {
     .lineChart_grid, .lineChart_layer {
         position: absolute;
-        top: 0;
-        right: 0;
-        left: $m-lineChart_axis-y_width;
         bottom: $m-lineChart_axis-x_height;
+        top: $m-lineChart_axis-x_height / 2;
+        left: $m-lineChart_axis-y_width;
+        right: $m-lineChart_axis-y_width / 2;
         font-size: 0;
     }
 
@@ -40,7 +40,7 @@ $m-lineChart_point_size ?= 9px;
 
     .lineChart_axis-x {
         left: $m-lineChart_axis-y_width;
-        right: -1px;
+        right: $m-lineChart_axis-y_width / 2 - 1px;
         bottom: 0;
         height: $m-lineChart_axis-x_height;
         border-top: 1px solid $m-lineChart_axis_border;
@@ -48,7 +48,7 @@ $m-lineChart_point_size ?= 9px;
 
     .lineChart_axis-y {
         left: 0;
-        top: -1px;
+        top: $m-lineChart_axis-x_height / 2 - 1px;
         bottom: $m-lineChart_axis-x_height;
         width: $m-lineChart_axis-y_width;
         border-right: 1px solid $m-lineChart_axis_border;
@@ -74,6 +74,18 @@ $m-lineChart_point_size ?= 9px;
         text-align: right;
     }
 
+    .lineChart_label-xName {
+        right: -50px;
+        top: 6px;
+        bottom: 0;
+    }
+
+    .lineChart_label-yName {
+        right: 10px;
+        top: -30px;
+        text-align: right;
+    }
+
     .lineChart_layer {
         z-index: 10;
 
@@ -86,7 +98,7 @@ $m-lineChart_point_size ?= 9px;
         position: absolute;
         $box-sizing: border-box;
         $size: $m-lineChart_point_size;
-        background: white; // rgba(255,255,255,0.3);
+        background: white;
         border: 2px solid rgba(0,153,255,0.6);
         $border-radius: 100%;
         margin-bottom: - ($m-lineChart_point_size - 1) / 2;
@@ -119,28 +131,4 @@ $m-lineChart_point_size ?= 9px;
         stroke-opacity: 0;
         fill: rgba(0,153,255,0.3);
     }
-
-    /*
-    .lineChart_bar {
-        position: absolute;
-        $box-sizing: border-box;
-        bottom: 0;
-        width: $m-lineChart_bar_width;
-        left: 50%;
-        margin-left: -$m-lineChart_bar_width / 2;
-        background: rgba(0,153,255,0.3);
-        border: 2px solid rgba(0,153,255,0.6);
-        border-bottom: none;
-
-        .u-tooltip {
-            display: none;
-            position: absolute;
-            z-index: 10;
-            left: 100%;
-            top: -2px;
-            margin-left: 5px;
-            white-space: nowrap;
-        }
-    }
-    */
 }

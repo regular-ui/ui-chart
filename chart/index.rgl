@@ -1,10 +1,18 @@
-<div class="m-chart {class}" r-class={{ 'z-loading': !data, 'z-empty': data && !data.length }} z-dis={disabled} r-hide={!visible} style="width: {width}; height: {height};">
+<div class="m-chart {class}" r-class={{ 'm-chart-border': border, 'z-loading': !data, 'z-empty': data && !data.length }} z-dis={disabled} r-hide={!visible} style="width: {width}; height: {height};">
     {#if titleTemplate}
         <div class="chart_tt">{#inc titleTemplate}</div>
     {#elseif title}
         <div class="chart_tt">{title}</div>
     {/if}
+    {#if legend}
+    <div class="chart_legend">
+        {#list series as sery}
+        <div class="chart_legend_item chart_legend_item-{sery.key}">{sery.name || sery.key}</div>
+        {/list}
+    </div>
+    {/if}
     <div class="chart_ct">
         {#inc contentTemplate}
     </div>
+    {#inc this.$body}
 </div>
