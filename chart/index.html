@@ -39,7 +39,12 @@
 <h3 id="基本形式">基本形式</h3>
 <div class="m-example"></div>
 
-<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">chart</span> <span class="cm-tagcm-bracket">/&gt;</span>
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">chart</span> <span class="cm-attribute">title</span>=<span class="cm-string">&quot;图表&quot;</span> <span class="cm-tagcm-bracket">/&gt;</span>
+</code></pre>
+<h3 id="边框">边框</h3>
+<div class="m-example"></div>
+
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">chart</span> <span class="cm-attribute">title</span>=<span class="cm-string">&quot;图表&quot;</span> <span class="cm-attribute">border</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
 </code></pre>
 
         <h2 id="API">API</h2>
@@ -108,7 +113,14 @@
 
 var index = 0;
 (function (index) {
-    var template = "<chart />";
+    var template = "<chart title=\"图表\" />";
+    var component = new RGUI.Component({
+        template: template
+    });
+    component && component.$inject($$(".m-example")[index]);
+})(index++);
+(function (index) {
+    var template = "<chart title=\"图表\" border />";
     var component = new RGUI.Component({
         template: template
     });
