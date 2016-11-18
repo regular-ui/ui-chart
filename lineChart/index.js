@@ -51,7 +51,7 @@ const LineChart = Chart.extend({
      * @override
      */
     watch() {
-        // this.$watch('data', (newValue, oldValue) {
+        // this.$watch('data', (data) {
         //     this.data.data.ser
         // });
     },
@@ -126,17 +126,22 @@ const LineChart = Chart.extend({
             }
 
             _yAxis.count = this.data.yAxis.count || 8;
-            const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
+            let tick = this.data.yAxis.tick || _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
+            if (this.data.yAxis.minTick && tick < this.data.yAxis.minTick)
+                tick = this.data.yAxis.minTick;
             _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
             _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)
-                _yAxis.max = _yAxis.min + 1;
+                _yAxis.max = _yAxis.min + 5;
 
             _yAxis.data = [];
-            for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
+            for (let i = _yAxis.min; i <= _yAxis.max; i += tick) {
+                if (i > 0 && i < 1)
+                    i = +i.toFixed((tick + '').length - 2);
                 _yAxis.data.push(i);
+            }
         }
 
         setTimeout(() => {

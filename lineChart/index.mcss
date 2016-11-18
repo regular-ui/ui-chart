@@ -94,6 +94,17 @@ $m-lineChart_point_size ?= 9px;
         }
     }
 
+    .lineChart_line {
+        fill-opacity: 0;
+        stroke: rgba(0,153,255,0.6);
+        stroke-width: 2px;
+    }
+
+    .lineChart_area {
+        stroke-opacity: 0;
+        fill: rgba(0,153,255,0.3);
+    }
+
     .lineChart_point {
         position: absolute;
         $box-sizing: border-box;
@@ -119,16 +130,5 @@ $m-lineChart_point_size ?= 9px;
         .u-tooltip {
             display: block;
         }
-    }
-
-    .lineChart_line {
-        fill-opacity: 0;
-        stroke: rgba(0,153,255,0.6);
-        stroke-width: 2px;
-    }
-
-    .lineChart_area {
-        stroke-opacity: 0;
-        fill: rgba(0,153,255,0.3);
     }
 }
