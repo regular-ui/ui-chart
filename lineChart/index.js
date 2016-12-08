@@ -9,10 +9,21 @@ const TICKES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 30, 40, 50, 100, 200, 50
  * @class LineChart
  * @extend Chart
  * @param {object}                  options.data                     =  绑定属性
- * @param {string='Hello World'}    options.data.message            <=> 消息
- * @param {boolean=false}           options.data.disabled            => 是否禁用
+ * @param {string='100%'}           options.data.width               => 图表宽度
+ * @param {string='480px'}          options.data.height              => 图表高度
+ * @param {string=''}               options.data.title               => 标题
+ * @param {string=''}               options.data.titleTemplate      @=> 标题模板
+ * @param {string=''}               options.data.tooltipTemplate    @=> 工具提示模板
+ * @param {Array}                   options.data.data                => 数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。
+ * @param {object}                  options.data.xAxis               => 横坐标信息
+ * @param {object}                  options.data.yAxis               => 纵坐标信息
+ * @param {Array=[]}                options.data.series              => 序列信息
+ * @param {boolean=false}           options.data.smooth              => 是否用光滑曲线
+ * @param {boolean=false}           options.data.fill                => 是否填充区域
+ * @param {boolean=false}           options.data.border              => 是否显示边框
+ * @param {boolean=true}            options.data.legend              => 是否显示图例
  * @param {boolean=true}            options.data.visible             => 是否显示
- * @param {string=''}               options.data.class               => 补充class
+ * @param {string='m-lineChart'}    options.data.class               => 补充class
  */
 const LineChart = Chart.extend({
     name: 'lineChart',
@@ -45,23 +56,6 @@ const LineChart = Chart.extend({
         });
         this.supr();
         this.watch();
-    },
-    /**
-     * @protected
-     * @override
-     */
-    watch() {
-        // this.$watch('data', (data) {
-        //     this.data.data.ser
-        // });
-    },
-    /**
-     * @protected
-     * @override
-     */
-    init() {
-        this.supr();
-        this.draw();
     },
     /**
      * @private
@@ -126,22 +120,17 @@ const LineChart = Chart.extend({
             }
 
             _yAxis.count = this.data.yAxis.count || 8;
-            let tick = this.data.yAxis.tick || _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
-            if (this.data.yAxis.minTick && tick < this.data.yAxis.minTick)
-                tick = this.data.yAxis.minTick;
+            const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
             _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
             _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)
-                _yAxis.max = _yAxis.min + 5;
+                _yAxis.max = _yAxis.min + 1;
 
             _yAxis.data = [];
-            for (let i = _yAxis.min; i <= _yAxis.max; i += tick) {
-                if (i > 0 && i < 1)
-                    i = +i.toFixed((tick + '').length - 2);
+            for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
                 _yAxis.data.push(i);
-            }
         }
 
         setTimeout(() => {
