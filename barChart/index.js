@@ -74,15 +74,15 @@ const BarChart = Chart.extend({
             if (this.data.yAxis.min !== undefined)
                 _yAxis.min = this.data.yAxis.min;
             else {
-                _yAxis.min = Math.min.apply(null, this.data.series.map((sery) =>
-                    Math.min.apply(null, this.data.data.map((item) => item[sery.key]))
+                _yAxis.min = Math.min(...this.data.series.map((sery) =>
+                    Math.min(...this.data.data.map((item) => item[sery.key]))
                 ));
             }
             if (this.data.yAxis.max !== undefined)
                 _yAxis.max = this.data.yAxis.max;
             else {
-                _yAxis.max = Math.max.apply(null, this.data.series.map((sery) =>
-                    Math.max.apply(null, this.data.data.map((item) => item[sery.key]))
+                _yAxis.max = Math.max(...this.data.series.map((sery) =>
+                    Math.max(...this.data.data.map((item) => item[sery.key]))
                 ));
             }
 

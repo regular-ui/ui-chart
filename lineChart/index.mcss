@@ -18,11 +18,6 @@ $m-lineChart_point_size ?= 9px;
         font-size: 0;
     }
 
-    // 修复最下面2px线条在svg中只显示一半的问题
-    .lineChart_layer {
-        bottom: $m-lineChart_axis-x_height - $m-lineChart_line_width;
-    }
-
     .lineChart_line {
         position: absolute;
     }
@@ -103,6 +98,11 @@ $m-lineChart_point_size ?= 9px;
         }
     }
 
+    // 修复最下面2px线条在svg中只显示一半的问题
+    .lineChart_layer-svg {
+        bottom: $m-lineChart_axis-x_height - $m-lineChart_line_width;
+    }
+
     .lineChart_line { fill-opacity: 0; stroke-width: $m-lineChart_line_width; }
     .lineChart_area { stroke-opacity: 0; }
 
@@ -133,10 +133,50 @@ $m-lineChart_point_size ?= 9px;
         }
     }
 
+    .lineChart_piece {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-left: 1px solid transparent;
 
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -50%;
+            width: 50%;
+        }
+
+        .u-tooltip {
+            display: none;
+            position: absolute;
+            z-index: 10;
+            margin-top: -16px;
+            white-space: nowrap;
+        }
+
+        .u-tooltip-right-top {
+            margin-left: 4px;
+        }
+
+        .u-tooltip-left-top {
+            margin-right: 10px;
+            right: 100%;
+        }
+    }
+
+    .lineChart_piece:hover {
+        border-left: 1px solid rgba(0,0,0,0.2);
+
+        .u-tooltip {
+            display: block;
+        }
+    }
 
     .lineChart_point {
         position: absolute;
+        left: -1px;
         $box-sizing: border-box;
         $size: $m-lineChart_point_size;
         background: white;
@@ -144,27 +184,11 @@ $m-lineChart_point_size ?= 9px;
         $border-radius: 100%;
         margin-bottom: - ($m-lineChart_point_size - 1) / 2;
         margin-left: - ($m-lineChart_point_size - 1) / 2;
-
-        .u-tooltip {
-            display: none;
-            position: absolute;
-            z-index: 10;
-            left: 100%;
-            top: -13px;
-            margin-left: 7px;
-            white-space: nowrap;
-        }
     }
 
-    .lineChart_point:hover {
-        .u-tooltip {
-            display: block;
-        }
-    }
-
-    .lineChart_points:nth-of-type(1) .lineChart_point { border-color: rgba(0,153,255,0.6); }
-    .lineChart_points:nth-of-type(2) .lineChart_point { border-color: rgb(255,174,60); }
-    .lineChart_points:nth-of-type(3) .lineChart_point { border-color: rgb(78,201,171); }
-    .lineChart_points:nth-of-type(4) .lineChart_point { border-color: rgb(245,131,122); }
-    .lineChart_points:nth-of-type(5) .lineChart_point { border-color: rgb(158,156,246); }
+    .lineChart_piece .lineChart_point:nth-of-type(1) { border-color: rgba(0,153,255,0.6); }
+    .lineChart_piece .lineChart_point:nth-of-type(2) { border-color: rgb(255,174,60); }
+    .lineChart_piece .lineChart_point:nth-of-type(3) { border-color: rgb(78,201,171); }
+    .lineChart_piece .lineChart_point:nth-of-type(4) { border-color: rgb(245,131,122); }
+    .lineChart_piece .lineChart_point:nth-of-type(5) { border-color: rgb(158,156,246); }
 }
