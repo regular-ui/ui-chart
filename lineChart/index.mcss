@@ -4,6 +4,7 @@ $m-lineChart_axis_border ?= #ccc;
 $m-lineChart_axis-y_offset ?= 10px;
 $m-lineChart_axis-x_offset ?= 6px;
 $m-lineChart_line_border ?= #eee;
+$m-lineChart_line_width ?= 2px;
 $m-lineChart_line_offset ?= 6px;
 $m-lineChart_point_size ?= 9px;
 
@@ -15,6 +16,11 @@ $m-lineChart_point_size ?= 9px;
         left: $m-lineChart_axis-y_width;
         right: $m-lineChart_axis-y_width / 2;
         font-size: 0;
+    }
+
+    // 修复最下面2px线条在svg中只显示一半的问题
+    .lineChart_layer {
+        bottom: $m-lineChart_axis-x_height - $m-lineChart_line_width;
     }
 
     .lineChart_line {
@@ -55,12 +61,12 @@ $m-lineChart_point_size ?= 9px;
     }
 
     .lineChart_label {
-        @extend .f-toe;
         position: absolute;
         font-size: 12px;
     }
 
     .lineChart_label-x {
+        @extend .f-toe;
         top: $m-lineChart_axis-x_offset;
         bottom: 0;
         $transform: translateX(-50%);
@@ -90,20 +96,44 @@ $m-lineChart_point_size ?= 9px;
         z-index: 10;
 
         > svg {
+            position: absolute;
+            top: 0;
+            left: 0;
             $size: 100%;
         }
     }
 
-    .lineChart_line {
-        fill-opacity: 0;
-        stroke: rgba(0,153,255,0.6);
-        stroke-width: 2px;
+    .lineChart_line { fill-opacity: 0; stroke-width: $m-lineChart_line_width; }
+    .lineChart_area { stroke-opacity: 0; }
+
+    .lineChart_layer {
+        > svg:nth-of-type(1) {
+            .lineChart_line { stroke: rgba(0,153,255,0.6); }
+            .lineChart_area { fill: rgba(0,153,255,0.3); }
+        }
+
+        > svg:nth-of-type(2) {
+            .lineChart_line { stroke: rgb(255,174,60); }
+            .lineChart_area { fill: rgba(255,174,60,0.1); }
+        }
+
+        > svg:nth-of-type(3) {
+            .lineChart_line { stroke: rgb(78,201,171); }
+            .lineChart_area { fill: rgba(78,201,171,0.1); }
+        }
+
+        > svg:nth-of-type(4) {
+            .lineChart_line { stroke: rgb(245,131,122); }
+            .lineChart_area { fill: rgba(245,131,122,0.1); }
+        }
+
+        > svg:nth-of-type(5) {
+            .lineChart_line { stroke: rgb(158,156,246); }
+            .lineChart_area { fill: rgba(158,156,246,0.1); }
+        }
     }
 
-    .lineChart_area {
-        stroke-opacity: 0;
-        fill: rgba(0,153,255,0.3);
-    }
+
 
     .lineChart_point {
         position: absolute;
@@ -131,4 +161,10 @@ $m-lineChart_point_size ?= 9px;
             display: block;
         }
     }
+
+    .lineChart_points:nth-of-type(1) .lineChart_point { border-color: rgba(0,153,255,0.6); }
+    .lineChart_points:nth-of-type(2) .lineChart_point { border-color: rgb(255,174,60); }
+    .lineChart_points:nth-of-type(3) .lineChart_point { border-color: rgb(78,201,171); }
+    .lineChart_points:nth-of-type(4) .lineChart_point { border-color: rgb(245,131,122); }
+    .lineChart_points:nth-of-type(5) .lineChart_point { border-color: rgb(158,156,246); }
 }

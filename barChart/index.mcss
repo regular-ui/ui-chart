@@ -4,6 +4,7 @@ $m-barChart_axis_border ?= #ccc;
 $m-barChart_axis-y_offset ?= 10px;
 $m-barChart_axis-x_offset ?= 6px;
 $m-barChart_line_border ?= #eee;
+$m-barChart_line_width ?= 2px;
 $m-barChart_line_offset ?= 6px;
 $m-barChart_bar_width ?= 60px;
 
@@ -55,12 +56,12 @@ $m-barChart_bar_width ?= 60px;
     }
 
     .barChart_label {
-        @extend .f-toe;
         position: absolute;
         font-size: 12px;
     }
 
     .barChart_label-x {
+        @extend .f-toe;
         top: $m-barChart_axis-x_offset;
         bottom: 0;
         // $transform: translateX(-50%);
@@ -104,7 +105,7 @@ $m-barChart_bar_width ?= 60px;
         left: 50%;
         margin-left: -$m-barChart_bar_width / 2;
         background: rgba(0,153,255,0.3);
-        border: 2px solid rgba(0,153,255,0.6);
+        border: $m-barChart_line_width solid rgba(0,153,255,0.6);
         border-bottom: none;
 
         .u-tooltip {

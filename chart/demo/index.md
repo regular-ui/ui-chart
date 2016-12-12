@@ -21,7 +21,7 @@
 
 ```xml
 <chart title="图表" border
-    series={series} />
+    series={[{ key: 'readings', name: '阅读数' }, { key: 'stars', name: '点赞数' }, { key: 'collections', name: '收藏数' }]} />
 ```
 
 ```javascript

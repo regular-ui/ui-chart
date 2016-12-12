@@ -115,7 +115,7 @@ let component = new RGUI.Component({
 });
 ```
 
-### 隐藏图例
+### 单位
 
 <div class="m-example"></div>
 

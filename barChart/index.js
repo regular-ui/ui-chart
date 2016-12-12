@@ -93,7 +93,7 @@ const BarChart = Chart.extend({
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)
-                _yAxis.max = _yAxis.min + 1;
+                _yAxis.max = _yAxis.min + _yAxis.count;
 
             _yAxis.data = [];
             for (let i = _yAxis.min; i <= _yAxis.max; i += tick)

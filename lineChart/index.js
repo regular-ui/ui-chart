@@ -121,16 +121,17 @@ const LineChart = Chart.extend({
 
             _yAxis.count = this.data.yAxis.count || 8;
             const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
+            const fixedCount = _.getFixedCount(tick);
             _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
             _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)
-                _yAxis.max = _yAxis.min + 1;
+                _yAxis.max = _yAxis.min + _yAxis.count;
 
             _yAxis.data = [];
             for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
-                _yAxis.data.push(i);
+                _yAxis.data.push(i.toFixed(fixedCount)); // 防止+的时候出现无限小数的情况
         }
 
         setTimeout(() => {

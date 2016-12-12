@@ -23,7 +23,7 @@
 </div>
 <div class="lineChart_layer">
     {#list series as sery}
-        <svg>
+        <svg r-hide={sery.hidden}>
             {#if fill}<path class="lineChart_area" d={this._getD(sery, 'area')} />{/if}
             <path class="lineChart_line" d={this._getD(sery)} />
         </svg>
@@ -31,9 +31,10 @@
 </div>
 <div class="lineChart_layer">
     {#list series as sery}
+    <div class="lineChart_points">
         {#list data as item}
             {#if item[sery.key] !== undefined}
-            <div class="lineChart_point" style="left: {100*item_index/(data.length - 1)}%; bottom: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
+            <div class="lineChart_point" r-hide={sery.hidden} style="left: {100*item_index/(data.length - 1)}%; bottom: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
                 <div class="lineChart_value">{this.format(item[sery.key])}</div>
                 <div class="u-tooltip u-tooltip-right-top">
                     {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.name || sery.key}: {this.format(item[sery.key])}{/if}
@@ -41,5 +42,6 @@
             </div>
             {/if}
         {/list}
+    </div>
     {/list}
 </div>
