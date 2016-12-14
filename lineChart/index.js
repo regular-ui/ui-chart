@@ -55,7 +55,13 @@ const LineChart = Chart.extend({
             tooltipTemplate: '',
         });
         this.supr();
-        this.watch();
+
+        this._onResize = this._onResize.bind(this);
+        dom.on(window, 'resize', this._onResize);
+    },
+    destroy() {
+        dom.off(window, 'resize', this._onResize);
+        this.supr();
     },
     /**
      * @private
@@ -63,6 +69,13 @@ const LineChart = Chart.extend({
     _getSize() {
         this.data._width = this.$refs.grid && this.$refs.grid.offsetWidth;
         this.data._height = this.$refs.grid && this.$refs.grid.offsetHeight;
+    },
+    /**
+     * @private
+     */
+    _onResize() {
+        this._getSize();
+        this.$update();
     },
     draw() {
         if (!this.data.data || !this.data.data.length)

@@ -47,7 +47,6 @@ const BarChart = Chart.extend({
             tooltipTemplate: '',
         });
         this.supr();
-        this.watch();
     },
     draw() {
         if (!this.data.data || !this.data.data.length)
