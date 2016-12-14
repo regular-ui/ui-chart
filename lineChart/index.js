@@ -2,6 +2,7 @@ import { Component } from 'rgui-ui-base';
 import contentTemplate from './index.rgl';
 import Chart from '../chart';
 import _ from '../util';
+import { dom } from 'regularjs';
 
 const TICKES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 30, 40, 50, 100, 200, 500, 1000, 1];
 
@@ -156,6 +157,8 @@ const LineChart = Chart.extend({
     },
     _getD(sery, type) {
         if (!this.data._width || !this.data._height || !this.data.data || !this.data._xAxis.data.length || !this.data._yAxis.data.length)
+            return;
+        if (this.data.data.length <= 1) // 一个点无需绘制线条
             return;
 
         const width = this.data._width;
