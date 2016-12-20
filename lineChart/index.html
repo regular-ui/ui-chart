@@ -132,7 +132,7 @@
     },
 });
 </code></pre>
-<h3 id="隐藏图例">隐藏图例</h3>
+<h3 id="单位">单位</h3>
 <div class="m-example"></div>
 
 <pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">lineChart</span> <span class="cm-attribute">border</span> <span class="cm-attribute">title</span>=<span class="cm-string">&quot;每星期访问量&quot;</span>
@@ -159,34 +159,58 @@
 
         <h2 id="API">API</h2>
 
-<h3 id="Class">Class</h3>
-<h4>LineChart</h4>
-<p>继承自<strong>Chart</strong>。</p>
-<p></p>
-<div id="j-class"></div>
 
-<h3 id="Options">Options</h3>
-<h4>new LineChart()</h4>
-<table>
-    <thead>
-        <tr><th width="24%">参数</th><th width="16%">类型</th><th width="16%">默认值</th><th width="18%">数据流向</th><th width="26%">描述</th></tr>
-    </thead>
-    <tbody>
-        
+    <h3 id="Class">Class</h3>
+    <h4>LineChart</h4>
+    <p>继承自<strong>Chart</strong>。</p>
+    <p></p>
+    <div id="j-class"></div>
+
+    <h3 id="Options">Options</h3>
+    <h4>new LineChart()</h4>
+    <table>
+        <thead>
+            <tr><th width="24%">参数</th><th width="16%">类型</th><th width="16%">默认值</th><th width="18%">数据流向</th><th width="26%">描述</th></tr>
+        </thead>
+        <tbody>
             
-            <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                
+                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.width</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;100%&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表宽度</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.height</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;480px&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表高度</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.title</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>标题</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.titleTemplate</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside @=&gt; inside</td><td>标题模板</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.tooltipTemplate</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside @=&gt; inside</td><td>工具提示模板</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.data</code></td><td class="f-wsn">Array</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.xAxis</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>横坐标信息</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.yAxis</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>纵坐标信息</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.series</code></td><td class="f-wsn">Array</td><td class="f-wsn"><code>[]</code></td><td class="f-tac">outside  =&gt; inside</td><td>序列信息</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.smooth</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否用光滑曲线</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.fill</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否填充区域</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.border</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示边框</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.legend</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示图例</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.visible</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.class</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;m-lineChart&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>补充class</td></tr>
+                
             
-            <tr><td class="f-wsn"><code>data.message</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;Hello World&#39;</code></td><td class="f-tac">outside &lt;=&gt; inside</td><td>消息</td></tr>
-            
-            <tr><td class="f-wsn"><code>data.disabled</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否禁用</td></tr>
-            
-            <tr><td class="f-wsn"><code>data.visible</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示</td></tr>
-            
-            <tr><td class="f-wsn"><code>data.class</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>补充class</td></tr>
-            
-        
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
 <div id="j-options"></div>
 
 

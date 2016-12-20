@@ -46,33 +46,65 @@
 
 <pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">chart</span> <span class="cm-attribute">title</span>=<span class="cm-string">&quot;图表&quot;</span> <span class="cm-attribute">border</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
 </code></pre>
+<h3 id="图例">图例</h3>
+<div class="m-example"></div>
+
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">chart</span> <span class="cm-attribute">title</span>=<span class="cm-string">&quot;图表&quot;</span> <span class="cm-attribute">border</span>
+    <span class="cm-attribute">series</span>=<span class="cm-attribute">{[{</span> <span class="cm-attribute">key:</span> <span class="cm-stringcm-error">&#39;readings&#39;</span><span class="cm-attribute">,</span> <span class="cm-attribute">name:</span> <span class="cm-stringcm-error">&#39;阅读数&#39;</span> <span class="cm-attribute">},</span> <span class="cm-attribute">{</span> <span class="cm-attribute">key:</span> <span class="cm-stringcm-error">&#39;stars&#39;</span><span class="cm-attribute">,</span> <span class="cm-attribute">name:</span> <span class="cm-stringcm-error">&#39;点赞数&#39;</span> <span class="cm-attribute">},</span> <span class="cm-attribute">{</span> <span class="cm-attribute">key:</span> <span class="cm-stringcm-error">&#39;collections&#39;</span><span class="cm-attribute">,</span> <span class="cm-attribute">name:</span> <span class="cm-stringcm-error">&#39;收藏数&#39;</span> <span class="cm-attribute">}]}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+</code></pre>
+<pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
+    <span class="cm-property">template</span>,
+    <span class="cm-property">data</span>: {
+        <span class="cm-comment">// 本来应该直接在模板中书写，Regular有bug</span>
+        <span class="cm-property">series</span>: [{ <span class="cm-property">key</span>: <span class="cm-string">&#39;readings&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;阅读数&#39;</span> }, { <span class="cm-property">key</span>: <span class="cm-string">&#39;stars&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;点赞数&#39;</span> }, { <span class="cm-property">key</span>: <span class="cm-string">&#39;collections&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;收藏数&#39;</span> }],
+    },
+});
+</code></pre>
 
         <h2 id="API">API</h2>
 
-<h3 id="Class">Class</h3>
-<h4>Chart</h4>
-<p>继承自<strong>Component</strong>。</p>
-<p></p>
-<div id="j-class"></div>
 
-<h3 id="Options">Options</h3>
-<h4>new Chart()</h4>
-<table>
-    <thead>
-        <tr><th width="24%">参数</th><th width="16%">类型</th><th width="16%">默认值</th><th width="18%">数据流向</th><th width="26%">描述</th></tr>
-    </thead>
-    <tbody>
-        
+    <h3 id="Class">Class</h3>
+    <h4>Chart</h4>
+    <p>继承自<strong>Component</strong>。</p>
+    <p></p>
+    <div id="j-class"></div>
+
+    <h3 id="Options">Options</h3>
+    <h4>new Chart()</h4>
+    <table>
+        <thead>
+            <tr><th width="24%">参数</th><th width="16%">类型</th><th width="16%">默认值</th><th width="18%">数据流向</th><th width="26%">描述</th></tr>
+        </thead>
+        <tbody>
             
-            <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                
+                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.width</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;100%&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表宽度</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.height</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;480px&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表高度</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.title</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>标题</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.titleTemplate</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside @=&gt; inside</td><td>标题模板</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.contentTemplate</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside @=&gt; inside</td><td>内容模板，继承中使用</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.data</code></td><td class="f-wsn">Array</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.border</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示边框</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.legend</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示图例</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.visible</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.class</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>补充class</td></tr>
+                
             
-            <tr><td class="f-wsn"><code>data.visible</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示</td></tr>
-            
-            <tr><td class="f-wsn"><code>data.class</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>补充class</td></tr>
-            
-        
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
 <div id="j-options"></div>
 
 
@@ -123,6 +155,17 @@ var index = 0;
     var template = "<chart title=\"图表\" border />";
     var component = new RGUI.Component({
         template: template
+    });
+    component && component.$inject($$(".m-example")[index]);
+})(index++);
+(function (index) {
+    var template = "<chart title=\"图表\" border\n    series={[{ key: 'readings', name: '阅读数' }, { key: 'stars', name: '点赞数' }, { key: 'collections', name: '收藏数' }]} />";
+    var component = new RGUI.Component({
+        template: template,
+        data: {
+            // 本来应该直接在模板中书写，Regular有bug
+            series: [{ key: 'readings', name: '阅读数' }, { key: 'stars', name: '点赞数' }, { key: 'collections', name: '收藏数' }]
+        }
     });
     component && component.$inject($$(".m-example")[index]);
 })(index++);
