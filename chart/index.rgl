@@ -4,6 +4,11 @@
     {#elseif title}
         <div class="chart_tt">{title}</div>
     {/if}
+    {#if captionTemplate}
+        <div class="chart_caption">{#inc captionTemplate}</div>
+    {#elseif caption}
+        <div class="chart_caption">{caption}</div>
+    {/if}
     {#if legend}
     <div class="chart_legend">
         {#list series as sery}
@@ -11,7 +16,7 @@
         {/list}
     </div>
     {/if}
-    <div class="chart_ct">
+    <div class="chart_ct" ref="content">
         {#inc contentTemplate}
     </div>
     {#inc this.$body}

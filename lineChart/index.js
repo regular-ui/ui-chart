@@ -68,6 +68,9 @@ const LineChart = Chart.extend({
      * @private
      */
     _getSize() {
+        if (!this.$refs)
+            return;
+
         this.data._width = this.$refs.grid && this.$refs.grid.offsetWidth;
         this.data._height = this.$refs.grid && this.$refs.grid.offsetHeight;
     },
@@ -81,6 +84,8 @@ const LineChart = Chart.extend({
     draw() {
         if (!this.data.data || !this.data.data.length)
             return;
+
+        this._getSize();
 
         //
         // 确定横坐标
@@ -99,7 +104,7 @@ const LineChart = Chart.extend({
 
                 // 如果不能整除，则补充空数据
                 if (tick === 1) {
-                    this.data.data.push({});
+                    this.data.data.push({ hidden: true });
                     pieceCounts++;
                 } else
                     break;

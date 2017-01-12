@@ -31,6 +31,7 @@
 </div>
 <div class="lineChart_layer">
     {#list data as item}
+    {#if !item.hidden}
     <div class="lineChart_piece" style="left: {100*item_index/(data.length - 1)}%; width: {100/(data.length - 1)}%;">
         {#list series as sery}
             {#if item[sery.key] !== undefined}
@@ -39,7 +40,7 @@
             </div>
             {/if}
         {/list}
-        <div class="u-tooltip u-tooltip-{item_index > data.length/2 ? 'left-top' : 'right-top'}" style="top: {100*(_yAxis.max - this._getTopOne(item))/(_yAxis.max - _yAxis.min)}%;">
+        <div class="u-tooltip u-tooltip-{item_index >= data.length/2 ? 'left-top' : 'right-top'}" style="top: {100*(_yAxis.max - this._getTopOne(item))/(_yAxis.max - _yAxis.min)}%;">
             {#if tooltipTemplate}
                 {#inc tooltipTemplate}
             {#else}
@@ -49,5 +50,6 @@
             {/if}
         </div>
     </div>
+    {/if}
     {/list}
 </div>
