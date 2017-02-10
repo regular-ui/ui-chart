@@ -172,7 +172,7 @@ const LineChart = Chart.extend({
 
         const cmds = this.data.data.map((item, index) => {
             const x = width*index/(this.data.data.length - 1);
-            const y = height*(1 - (item[sery.key] - this.data._yAxis.min)/this.data._yAxis.max);
+            const y = height*(1 - (item[sery.key] - this.data._yAxis.min)/(this.data._yAxis.max - this.data._yAxis.min));
 
             if (isNaN(y)) // 处理空数据的情况
                 return '';
