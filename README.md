@@ -31,6 +31,15 @@ Regular UI - Chart, BarChart, LineChart, PieChart, DonutChart
 
 - 基础示例+进阶案例+API: https://regular-ui.github.io/ui-chart/lineChart/index.html
 
+## PieChart（饼状图）
+
+- 基础示例+进阶案例+API: https://regular-ui.github.io/ui-chart/pieChart/index.html
+
+## DonutChart（甜圈图）
+
+- 基础示例+进阶案例+API: https://regular-ui.github.io/ui-chart/donutChart/index.html
+
+
 ## Copyright and License
 
 Code released under the MIT license.
