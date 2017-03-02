@@ -12,7 +12,7 @@
   "tags": ["regular", "ui", "rgui", "chart", "bar", "line", "pie", "donut"],
   "dependencies": {
     "rgui-ui-base": "^0.2.0",
-    "rgui-ui-overlay": "^0.2.0-alpha.2"
+    "rgui-ui-overlay": "^0.2.0"
   },
   "peerDependencies": {
     "regularjs": "^0.4.3"

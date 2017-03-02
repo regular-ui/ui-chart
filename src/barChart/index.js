@@ -1,4 +1,3 @@
-import { Component } from 'rgui-ui-base';
 import contentTemplate from './index.rgl';
 import Chart from '../chart';
 import _ from '../util';
@@ -34,7 +33,7 @@ const BarChart = Chart.extend({
             // @inherited title: '',
             // @inherited titleTemplate: '',
             contentTemplate,
-            'class': 'm-barChart',
+            class: 'm-barChart',
             data: undefined,
             xAxis: {},
             yAxis: {
@@ -86,9 +85,9 @@ const BarChart = Chart.extend({
             }
 
             _yAxis.count = this.data.yAxis.count || 8;
-            const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
-            _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
-            _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
+            const tick = _.roundToFirst((_yAxis.max - _yAxis.min) / _yAxis.count) || 1;
+            _yAxis.min = Math.floor(_yAxis.min / tick) * tick;
+            _yAxis.max = Math.ceil(_yAxis.max / tick) * tick;
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)

@@ -1,4 +1,3 @@
-import { Component } from 'rgui-ui-base';
 import contentTemplate from './index.rgl';
 import Chart from '../chart';
 import _ from '../util';
@@ -41,7 +40,7 @@ const LineChart = Chart.extend({
             _width: undefined,
             _height: undefined,
             contentTemplate,
-            'class': 'm-lineChart',
+            class: 'm-lineChart',
             smooth: false,
             fill: false,
             data: undefined,
@@ -95,10 +94,10 @@ const LineChart = Chart.extend({
             _xAxis.count = this.data.xAxis.count || 12;
             let pieceCounts = this.data.data.length - 1;
             let tick = 1;
-            while (!(pieceCounts/tick <= _xAxis.count && pieceCounts%tick === 0)) {
+            while (!(pieceCounts / tick <= _xAxis.count && pieceCounts % tick === 0)) {
                 for (let i = 0; i < TICKES.length; i++) {
                     tick = TICKES[i];
-                    if (pieceCounts/tick <= _xAxis.count && pieceCounts%tick === 0)
+                    if (pieceCounts / tick <= _xAxis.count && pieceCounts % tick === 0)
                         break;
                 }
 
@@ -113,7 +112,7 @@ const LineChart = Chart.extend({
             _xAxis.tick = tick;
             _xAxis.data = [];
             this.data.data.forEach((item, index) =>
-                index%tick === 0 && _xAxis.data.push(item[this.data.xAxis.key]));
+                index % tick === 0 && _xAxis.data.push(item[this.data.xAxis.key]));
         }
 
         //
@@ -139,10 +138,10 @@ const LineChart = Chart.extend({
             }
 
             _yAxis.count = this.data.yAxis.count || 8;
-            const tick = _.roundToFirst((_yAxis.max - _yAxis.min)/_yAxis.count) || 1;
+            const tick = _.roundToFirst((_yAxis.max - _yAxis.min) / _yAxis.count) || 1;
             const fixedCount = _.getFixedCount(tick);
-            _yAxis.min = Math.floor(_yAxis.min/tick)*tick;
-            _yAxis.max = Math.ceil(_yAxis.max/tick)*tick;
+            _yAxis.min = Math.floor(_yAxis.min / tick) * tick;
+            _yAxis.max = Math.ceil(_yAxis.max / tick) * tick;
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)
@@ -168,11 +167,11 @@ const LineChart = Chart.extend({
 
         const width = this.data._width;
         const height = this.data._height;
-        const delta = width/(this.data.data.length - 1)/2;
+        const delta = width / (this.data.data.length - 1) / 2;
 
         const cmds = this.data.data.map((item, index) => {
-            const x = width*index/(this.data.data.length - 1);
-            const y = height*(1 - (item[sery.key] - this.data._yAxis.min)/(this.data._yAxis.max - this.data._yAxis.min));
+            const x = width * index / (this.data.data.length - 1);
+            const y = height * (1 - (item[sery.key] - this.data._yAxis.min) / (this.data._yAxis.max - this.data._yAxis.min));
 
             if (isNaN(y)) // 处理空数据的情况
                 return '';

@@ -2,8 +2,8 @@ import contentTemplate from './index.rgl';
 import Chart from '../chart';
 
 /**
- * @class DonutChart
- * @extends PieChart
+ * @class PieChart
+ * @extends Chart
  * @param {Object}                  options.data                     =  绑定属性
  * @param {string='100%'}           options.data.width               => 图表宽度
  * @param {string='480px'}          options.data.height              => 图表高度
@@ -17,8 +17,8 @@ import Chart from '../chart';
  * @param {boolean=true}            options.data.visible             => 是否显示
  * @param {string='m-donutChart'}   options.data.class               => 补充class
  */
-const DonutChart = Chart.extend({
-    name: 'donutChart',
+const PieChart = Chart.extend({
+    name: 'pieChart',
     /**
      * @protected
      * @override
@@ -26,7 +26,7 @@ const DonutChart = Chart.extend({
     config() {
         this.defaults({
             contentTemplate,
-            class: 'm-donutChart',
+            class: 'm-pieChart',
             RADIUS: 30,
         });
         this.supr();
@@ -56,6 +56,7 @@ const DonutChart = Chart.extend({
         d += item.percent > 50 ? 1 : 0;
         d += ' 1 ';
         d += end.x + ',' + end.y;
+        d += ' L 0,0 Z';
 
         return d;
     },
@@ -64,4 +65,4 @@ const DonutChart = Chart.extend({
     },
 });
 
-export default DonutChart;
+export default PieChart;

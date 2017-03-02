@@ -1,0 +1,41 @@
+$m-pieChart_g_size = 120px;
+
+// Component:       `m-pieChart`
+// ========================================================================
+
+.m-pieChart {
+    svg {
+        $size: 100%;
+
+        > g {
+            width: $m-pieChart_g_size;
+            height: $m-pieChart_g_size;
+        }
+    }
+
+    .pieChart_item {
+        fill: blue;
+        stroke: white;
+        stroke-width: 0.5px;
+        $transition: stroke-width 0.2s ease, stroke 0.2s ease;
+    }
+
+    // .pieChart_item.z-crt {
+    //     stroke-width: 1.5px;
+    // }
+
+    .pieChart_text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+.m-pieChart .pieChart_item-1 { fill: $brand-primary; }
+.m-pieChart .pieChart_item-2 { fill: $brand-info; }
+.m-pieChart .pieChart_item-3 { fill: $brand-success; }
+.m-pieChart .pieChart_item-4 { fill: $brand-warning; }
+.m-pieChart .pieChart_item-5 { fill: $brand-error; }

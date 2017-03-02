@@ -1,3 +1,5 @@
 @import './src/chart/index.mcss';
 @import './src/barChart/index.mcss';
 @import './src/lineChart/index.mcss';
+@import './src/pieChart/index.mcss';
+@import './src/donutChart/index.mcss';

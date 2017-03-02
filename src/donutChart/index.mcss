@@ -1,0 +1,45 @@
+$m-donutChart_g_size = 120px;
+
+// Component:       `m-donutChart`
+// ========================================================================
+
+.m-donutChart {
+    svg {
+        $size: 100%;
+
+        > g {
+            width: $m-donutChart_g_size;
+            height: $m-donutChart_g_size;
+
+            > circle {
+                fill: white;
+            }
+        }
+    }
+
+    .donutChart_item {
+        fill: none;
+        stroke: blue;
+        stroke-width: 20px;
+        $transition: stroke-width 0.2s ease, stroke 0.2s ease;
+    }
+
+    .donutChart_item.z-crt {
+        stroke-width: 30px;
+    }
+
+    .donutChart_text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+.m-donutChart .donutChart_item-1 { stroke: $brand-primary; }
+.m-donutChart .donutChart_item-2 { stroke: $brand-info; }
+.m-donutChart .donutChart_item-3 { stroke: $brand-success; }
+.m-donutChart .donutChart_item-4 { stroke: $brand-warning; }
+.m-donutChart .donutChart_item-5 { stroke: $brand-error; }
