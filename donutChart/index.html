@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<!-- 该文件由rgui-tools自动生成 -->
+<meta charset="utf-8">
+<title>Regular UI</title>
+<meta name="author" content="Rainfore">
+<meta name="keywords" content="Regular,UI,JavaScript,Framework,MVC,MVVM">
+<meta name="description" content="Regular UI">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="icon" href="https://regular-ui.github.io/v0.2/img/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://regular-ui.github.io/v0.2/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://regular-ui.github.io/v0.2/css/docs.default.min.css">
+<link rel="stylesheet" href="../css/index.css">
+<!--[if lt IE9]>
+<script>
+(function() {
+    if (!
+    /*@cc_on!@*/
+    0) return;
+    var e = 'abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video'.split(', ');
+    var i= e.length;
+    while (i--)
+        document.createElement(e[i]);
+})();
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="g-top">
+    <div class="g-topc">
+        <a class="u-logo" href="./">Regular UI</a>
+    </div>
+</div>
+<div class="g-bd"><div class="g-bdc"><div class="g-mn g-mn-center">
+    <article class="m-article">
+        <h1><small> </small></h1>
+        <h2 id="示例">示例</h2>
+<h3 id="基本形式">基本形式</h3>
+<div class="m-example"></div>
+
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">donutChart</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-attribute">series</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+</code></pre>
+<pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
+    <span class="cm-property">template</span>,
+    <span class="cm-property">data</span>: {
+        <span class="cm-property">data</span>: [
+            {<span class="cm-property">percent</span>: <span class="cm-number">12</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;1&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector1&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">20</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;2&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector2&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">30</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;3&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector3&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">18</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;4&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector4&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">20</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;5&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector5&#39;</span>},
+        ],
+    },
+});
+</code></pre>
+<h3 id="隐藏图例">隐藏图例</h3>
+<div class="m-example"></div>
+
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">donutChart</span> <span class="cm-attribute">legend</span>=<span class="cm-attribute">{false}</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+</code></pre>
+<pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
+    <span class="cm-property">template</span>,
+    <span class="cm-property">data</span>: {
+        <span class="cm-property">data</span>: [
+            {<span class="cm-property">percent</span>: <span class="cm-number">12</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;1&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector1&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">20</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;2&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector2&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">30</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;3&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector3&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">18</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;4&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector4&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">20</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;5&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector5&#39;</span>},
+        ],
+    },
+});
+</code></pre>
+<h3 id="其它">其它</h3>
+<div class="m-example"></div>
+
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">donutChart</span> <span class="cm-attribute">border</span> <span class="cm-attribute">title</span>=<span class="cm-string">&quot;每星期访问量&quot;</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+</code></pre>
+<pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
+    <span class="cm-property">template</span>,
+    <span class="cm-property">data</span>: {
+        <span class="cm-property">data</span>: [
+            {<span class="cm-property">percent</span>: <span class="cm-number">12</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;1&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector1&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">20</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;2&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector2&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">30</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;3&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector3&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">18</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;4&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector4&#39;</span>},
+            {<span class="cm-property">percent</span>: <span class="cm-number">20</span>, <span class="cm-property">key</span>: <span class="cm-string">&#39;5&#39;</span>, <span class="cm-property">name</span>: <span class="cm-string">&#39;sector5&#39;</span>},
+        ],
+    },
+});
+</code></pre>
+
+        <h2 id="API">API</h2>
+
+
+    <h3 id="Class">Class</h3>
+    <h4>DonutChart</h4>
+    <p>继承自<strong></strong>。</p>
+    <p></p>
+    <div id="j-class"></div>
+
+    <h3 id="Options">Options</h3>
+    <h4>new DonutChart()</h4>
+    <table>
+        <thead>
+            <tr><th width="24%">参数</th><th width="16%">类型</th><th width="16%">默认值</th><th width="18%">数据流向</th><th width="26%">描述</th></tr>
+        </thead>
+        <tbody>
+            
+                
+                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">Object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.width</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;100%&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表宽度</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.height</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;480px&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表高度</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.title</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>标题</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.titleTemplate</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside @=&gt; inside</td><td>标题模板</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.tooltipTemplate</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;&#39;</code></td><td class="f-tac">outside @=&gt; inside</td><td>工具提示模板</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.data</code></td><td class="f-wsn">Array</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.series</code></td><td class="f-wsn">Array</td><td class="f-wsn"><code>[]</code></td><td class="f-tac">outside  =&gt; inside</td><td>序列信息</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.border</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示边框</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.legend</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示图例</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.visible</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示</td></tr>
+                
+                <tr><td class="f-wsn"><code>data.class</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;m-donutChart&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>补充class</td></tr>
+                
+            
+        </tbody>
+    </table>
+
+<div id="j-options"></div>
+
+
+<div id="j-methods"></div>
+
+
+<div id="j-staticMethods"></div>
+
+
+<div id="j-inheritedMethods"></div>
+
+
+<div id="j-events"></div>
+
+
+<div id="j-inheritedEvents"></div>
+
+    </article>
+</div>
+</div></div><div class="g-ft">
+    <footer class="m-footer">
+        <p><a href="https://regular-ui.github.io/v0.2/" class="footer_logo"><img src="https://regular-ui.github.io/v0.2/img/logo-v2.0-bg-48.png" /></p>
+        <p>
+            <a href="https://github.com/regular-ui/regular-ui" target="_blank">GitHub</a> |
+            <a href="https://github.com/regular-ui/regular-ui/issues" target="_blank">Issues</a> |
+            <a href="https://github.com/regular-ui/regular-ui/releases" target="_blank">ChangeLog</a> |
+            <a href="https://github.com/regular-ui/regular-ui/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a>
+        </p>
+        <p>Licensed under <a href="https://github.com/regular-ui/regular-ui/blob/master/LICENSE" target="_blank">MIT license</a>.</p>
+    </footer>
+</div>
+<script src="https://regular-ui.github.io/v0.2/vendor/polyfill.min.js"></script>
+<script src="https://regular-ui.github.io/v0.2/vendor/regular.min.js"></script>
+<script src="../js/index.js"></script>
+<script src="https://regular-ui.github.io/v0.2/js/helper.js"></script>
+<script>
+'use strict';
+
+var index = 0;
+(function (index) {
+    var template = '<donutChart data={data} series={data} />';
+    var component = new RGUI.Component({
+        template: template,
+        data: {
+            data: [{ percent: 12, key: '1', name: 'sector1' }, { percent: 20, key: '2', name: 'sector2' }, { percent: 30, key: '3', name: 'sector3' }, { percent: 18, key: '4', name: 'sector4' }, { percent: 20, key: '5', name: 'sector5' }]
+        }
+    });
+    component && component.$inject($$(".m-example")[index]);
+})(index++);
+(function (index) {
+    var template = '<donutChart legend={false} data={data} />';
+    var component = new RGUI.Component({
+        template: template,
+        data: {
+            data: [{ percent: 12, key: '1', name: 'sector1' }, { percent: 20, key: '2', name: 'sector2' }, { percent: 30, key: '3', name: 'sector3' }, { percent: 18, key: '4', name: 'sector4' }, { percent: 20, key: '5', name: 'sector5' }]
+        }
+    });
+    component && component.$inject($$(".m-example")[index]);
+})(index++);
+(function (index) {
+    var template = '<donutChart border title="\u6BCF\u661F\u671F\u8BBF\u95EE\u91CF" data={data} />';
+    var component = new RGUI.Component({
+        template: template,
+        data: {
+            data: [{ percent: 12, key: '1', name: 'sector1' }, { percent: 20, key: '2', name: 'sector2' }, { percent: 30, key: '3', name: 'sector3' }, { percent: 18, key: '4', name: 'sector4' }, { percent: 20, key: '5', name: 'sector5' }]
+        }
+    });
+    component && component.$inject($$(".m-example")[index]);
+})(index++);
+</script>
+</body>
+</html>

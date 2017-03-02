@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <link rel="icon" href="https://regular-ui.github.io/v0.2/img/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="https://regular-ui.github.io/v0.2/img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="https://regular-ui.github.io/v0.2/css/doc.default.min.css">
+<link rel="stylesheet" href="https://regular-ui.github.io/v0.2/css/docs.default.min.css">
 <link rel="stylesheet" href="../css/index.css">
 <!--[if lt IE9]>
 <script>
@@ -66,7 +66,7 @@
 
     <h3 id="Class">Class</h3>
     <h4>Chart</h4>
-    <p>继承自<strong>Component</strong>。</p>
+    <p>继承自<strong></strong>。</p>
     <p></p>
     <div id="j-class"></div>
 
@@ -79,7 +79,7 @@
         <tbody>
             
                 
-                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">Object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
                 
                 <tr><td class="f-wsn"><code>data.width</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;100%&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表宽度</td></tr>
                 
@@ -145,21 +145,21 @@
 
 var index = 0;
 (function (index) {
-    var template = "<chart title=\"图表\" />";
+    var template = "<chart title=\"\u56FE\u8868\" />";
     var component = new RGUI.Component({
         template: template
     });
     component && component.$inject($$(".m-example")[index]);
 })(index++);
 (function (index) {
-    var template = "<chart title=\"图表\" border />";
+    var template = "<chart title=\"\u56FE\u8868\" border />";
     var component = new RGUI.Component({
         template: template
     });
     component && component.$inject($$(".m-example")[index]);
 })(index++);
 (function (index) {
-    var template = "<chart title=\"图表\" border\n    series={[{ key: 'readings', name: '阅读数' }, { key: 'stars', name: '点赞数' }, { key: 'collections', name: '收藏数' }]} />";
+    var template = "<chart title=\"\u56FE\u8868\" border\n    series={[{ key: 'readings', name: '\u9605\u8BFB\u6570' }, { key: 'stars', name: '\u70B9\u8D5E\u6570' }, { key: 'collections', name: '\u6536\u85CF\u6570' }]} />";
     var component = new RGUI.Component({
         template: template,
         data: {

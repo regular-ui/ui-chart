@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <link rel="icon" href="https://regular-ui.github.io/v0.2/img/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="https://regular-ui.github.io/v0.2/img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="https://regular-ui.github.io/v0.2/css/doc.default.min.css">
+<link rel="stylesheet" href="https://regular-ui.github.io/v0.2/css/docs.default.min.css">
 <link rel="stylesheet" href="../css/index.css">
 <!--[if lt IE9]>
 <script>
@@ -114,7 +114,7 @@
 
     <h3 id="Class">Class</h3>
     <h4>BarChart</h4>
-    <p>继承自<strong>Chart</strong>。</p>
+    <p>继承自<strong></strong>。</p>
     <p></p>
     <div id="j-class"></div>
 
@@ -127,7 +127,7 @@
         <tbody>
             
                 
-                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
+                <tr><td class="f-wsn"><code>data</code></td><td class="f-wsn">Object</td><td class="f-wsn"></td><td class="f-tac"></td><td>绑定属性</td></tr>
                 
                 <tr><td class="f-wsn"><code>data.width</code></td><td class="f-wsn">string</td><td class="f-wsn"><code>&#39;100%&#39;</code></td><td class="f-tac">outside  =&gt; inside</td><td>图表宽度</td></tr>
                 
@@ -141,9 +141,9 @@
                 
                 <tr><td class="f-wsn"><code>data.data</code></td><td class="f-wsn">Array</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。</td></tr>
                 
-                <tr><td class="f-wsn"><code>data.xAxis</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>横坐标信息</td></tr>
+                <tr><td class="f-wsn"><code>data.xAxis</code></td><td class="f-wsn">Object</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>横坐标信息</td></tr>
                 
-                <tr><td class="f-wsn"><code>data.yAxis</code></td><td class="f-wsn">object</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>纵坐标信息</td></tr>
+                <tr><td class="f-wsn"><code>data.yAxis</code></td><td class="f-wsn">Object</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>纵坐标信息</td></tr>
                 
                 <tr><td class="f-wsn"><code>data.series</code></td><td class="f-wsn">Array</td><td class="f-wsn"><code>[]</code></td><td class="f-tac">outside  =&gt; inside</td><td>序列信息</td></tr>
                 
@@ -219,7 +219,7 @@ var index = 0;
     component && component.$inject($$(".m-example")[index]);
 })(index++);
 (function (index) {
-    var template = '<barChart border title="每星期访问量"\n    xAxis={@({ key: \'week\' })}\n    yAxis={@({ min: 0, name: \'个\' })}\n    series={@([{ key: \'number\', name: \'访问量\' }])}\n    data={data} />';
+    var template = '<barChart border title="\u6BCF\u661F\u671F\u8BBF\u95EE\u91CF"\n    xAxis={@({ key: \'week\' })}\n    yAxis={@({ min: 0, name: \'\u4E2A\' })}\n    series={@([{ key: \'number\', name: \'\u8BBF\u95EE\u91CF\' }])}\n    data={data} />';
     var component = new RGUI.Component({
         template: template,
         data: {
