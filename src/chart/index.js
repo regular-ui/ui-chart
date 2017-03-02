@@ -3,8 +3,8 @@ import template from './index.rgl';
 
 /**
  * @class Chart
- * @extend Component
- * @param {object}                  options.data                     =  绑定属性
+ * @extends Component
+ * @param {Object}                  options.data                     =  绑定属性
  * @param {string='100%'}           options.data.width               => 图表宽度
  * @param {string='480px'}          options.data.height              => 图表高度
  * @param {string=''}               options.data.title               => 标题

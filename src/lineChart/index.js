@@ -8,16 +8,16 @@ const TICKES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 30, 40, 50, 100, 200, 50
 
 /**
  * @class LineChart
- * @extend Chart
- * @param {object}                  options.data                     =  绑定属性
+ * @extends Chart
+ * @param {Object}                  options.data                     =  绑定属性
  * @param {string='100%'}           options.data.width               => 图表宽度
  * @param {string='480px'}          options.data.height              => 图表高度
  * @param {string=''}               options.data.title               => 标题
  * @param {string=''}               options.data.titleTemplate      @=> 标题模板
  * @param {string=''}               options.data.tooltipTemplate    @=> 工具提示模板
  * @param {Array}                   options.data.data                => 数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。
- * @param {object}                  options.data.xAxis               => 横坐标信息
- * @param {object}                  options.data.yAxis               => 纵坐标信息
+ * @param {Object}                  options.data.xAxis               => 横坐标信息
+ * @param {Object}                  options.data.yAxis               => 纵坐标信息
  * @param {Array=[]}                options.data.series              => 序列信息
  * @param {boolean=false}           options.data.smooth              => 是否用光滑曲线
  * @param {boolean=false}           options.data.fill                => 是否填充区域

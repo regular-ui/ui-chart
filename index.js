@@ -1,5 +1,5 @@
-import Chart from './chart';
-import BarChart from './barChart';
-import LineChart from './lineChart';
+import Chart from './src/chart';
+import BarChart from './src/barChart';
+import LineChart from './src/lineChart';
 
 export { Chart, BarChart, LineChart };
