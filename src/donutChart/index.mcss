@@ -21,11 +21,11 @@ $m-donutChart_g_size = 120px;
         fill: none;
         stroke: blue;
         stroke-width: 20px;
-        $transition: stroke-width 0.2s ease, stroke 0.2s ease;
+        $transition: opacity 0.2s ease;
     }
 
-    .donutChart_item.z-crt {
-        stroke-width: 30px;
+    .donutChart_item:hover {
+        opacity: 0.8;
     }
 
     .donutChart_text {
@@ -38,8 +38,8 @@ $m-donutChart_g_size = 120px;
     }
 }
 
-.m-donutChart .donutChart_item-1 { stroke: $brand-primary; }
-.m-donutChart .donutChart_item-2 { stroke: $brand-info; }
-.m-donutChart .donutChart_item-3 { stroke: $brand-success; }
-.m-donutChart .donutChart_item-4 { stroke: $brand-warning; }
-.m-donutChart .donutChart_item-5 { stroke: $brand-error; }
+.m-donutChart .donutChart_item-1 { stroke: rgb(0,153,255); }
+.m-donutChart .donutChart_item-2 { stroke: rgb(255,174,60); }
+.m-donutChart .donutChart_item-3 { stroke: rgb(78,201,171); }
+.m-donutChart .donutChart_item-4 { stroke: rgb(245,131,122); }
+.m-donutChart .donutChart_item-5 { stroke: rgb(158,156,246); }

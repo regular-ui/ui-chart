@@ -32,8 +32,9 @@ const PieChart = Chart.extend({
         this.supr();
     },
     watch() {
-        this.$watch('data', (newValue, oldValue) => {
-            newValue && newValue.reduce((prev, current) => {
+        this.$watch('data', (data) => {
+            this.data.series = data;
+            data && data.reduce((prev, current) => {
                 current._pos = prev._pos + prev.percent;
                 return current;
             }, { percent: 0, _pos: 0 });

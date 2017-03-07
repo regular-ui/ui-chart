@@ -4,7 +4,7 @@
 <div class="m-example"></div>
 
 ```xml
-<pieChart data={data} series={data} />
+<pieChart data={data} />
 ```
 
 ```javascript

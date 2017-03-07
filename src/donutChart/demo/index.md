@@ -4,7 +4,7 @@
 <div class="m-example"></div>
 
 ```xml
-<donutChart data={data} series={data} />
+<donutChart data={data} />
 ```
 
 ```javascript
