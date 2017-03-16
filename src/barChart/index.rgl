@@ -25,14 +25,31 @@
 <div class="barChart_layer">
     {#list data as item}
     <div class="barChart_piece" style="left: {100*item_index/data.length}%; width: {100/data.length}%;">
-        {#list series as sery}
-        <div class="barChart_bar" style="height: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
-            <div class="barChart_value">{this.format(item[sery.key])}</div>
-            <div class="u-tooltip u-tooltip-right-top">
-                {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.name || sery.key}: {this.format(item[sery.key])}{/if}
+        {#if !stack}
+            {#list series as sery}
+            <div class="barChart_bar" style="height: {100*(item[sery.key] - _yAxis.min)/_yAxis.max}%">
+                <div class="barChart_value">{this.format(item[sery.key])}</div>
+                <div class="u-tooltip u-tooltip-right-top">
+                    {#if tooltipTemplate}{#inc tooltipTemplate}{#else}{sery.name || sery.key}: {this.format(item[sery.key])}{/if}
+                </div>
             </div>
-        </div>
-        {/list}
+            {/list}
+        {#else}
+            <div class="barChart_bar barChart_bar-stack" style="height: {100*(item.total - _yAxis.min)/_yAxis.max}%">
+                {#list series as sery}
+                <div class="barChart_bar barChart_bar-static" style="height: {100*(item[sery.key])/item.total}%"></div>
+                {/list}
+                <div class="u-tooltip u-tooltip-right-top">
+                    {#if tooltipTemplate}
+                        {#inc tooltipTemplate}
+                    {#else}
+                        {#list series as sery}
+                        <div>{sery.name || sery.key}: {this.format(item[sery.key])}</div>
+                        {/list}
+                    {/if}
+                </div>
+            </div>
+        {/if}
     </div>
     {/list}
 </div>

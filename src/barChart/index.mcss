@@ -124,4 +124,21 @@ $m-barChart_bar_width ?= 60px;
             display: block;
         }
     }
+
+    .barChart_bar-stack {
+        border: none;
+        background: none;
+    }
+
+    .barChart_bar-static {
+        position: static;
+        width: auto;
+        margin: 0;
+    }
+
+    .barChart_bar-static:nth-of-type(1) { border-color: rgba(0,153,255,0.6); background: rgba(0,153,255,0.3); }
+    .barChart_bar-static:nth-of-type(2) { border-color: rgba(255,174,60,0.6); background: rgba(255,174,60,0.3); }
+    .barChart_bar-static:nth-of-type(3) { border-color: rgba(78,201,171,0.6); background: rgba(78,201,171,0.3); }
+    .barChart_bar-static:nth-of-type(4) { border-color: rgba(245,131,122,0.6); background: rgba(245,131,122,0.3); }
+    .barChart_bar-static:nth-of-type(5) { border-color: rgba(158,156,246,0.6); background: rgba(158,156,246,0.3); }
 }

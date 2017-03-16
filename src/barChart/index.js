@@ -51,6 +51,17 @@ const BarChart = Chart.extend({
         if (!this.data.data || !this.data.data.length)
             return;
 
+        // 堆叠模式
+        if (this.data.stack) {
+            this.data.data.forEach((item) => {
+                if (item.total !== undefined)
+                    return;
+
+                item.total = 0;
+                this.data.series.forEach((sery) => item.total += item[sery.key]);
+            });
+        }
+
         //
         // 确定横坐标
         //
@@ -71,6 +82,8 @@ const BarChart = Chart.extend({
             // 如果没有设置最小值和最大值，则寻找
             if (this.data.yAxis.min !== undefined)
                 _yAxis.min = this.data.yAxis.min;
+            else if (this.data.stack)
+                _yAxis.min = Math.min(...this.data.data.map((item) => item.total));
             else {
                 _yAxis.min = Math.min(...this.data.series.map((sery) =>
                     Math.min(...this.data.data.map((item) => item[sery.key]))
@@ -78,6 +91,8 @@ const BarChart = Chart.extend({
             }
             if (this.data.yAxis.max !== undefined)
                 _yAxis.max = this.data.yAxis.max;
+            else if (this.data.stack)
+                _yAxis.max = Math.max(...this.data.data.map((item) => item.total));
             else {
                 _yAxis.max = Math.max(...this.data.series.map((sery) =>
                     Math.max(...this.data.data.map((item) => item[sery.key]))

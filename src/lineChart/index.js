@@ -127,14 +127,18 @@ const LineChart = Chart.extend({
             else {
                 _yAxis.min = Math.min(...this.data.series.map((sery) =>
                     Math.min(...this.data.data.map((item) =>
-                        item[sery.key] !== undefined ? item[sery.key] : Infinity)))); // 支持空数据
+                        item[sery.key] !== undefined ? item[sery.key] : Infinity)
+                    )
+                )); // 支持空数据
             }
             if (this.data.yAxis.max !== undefined)
                 _yAxis.max = this.data.yAxis.max;
             else {
                 _yAxis.max = Math.max(...this.data.series.map((sery) =>
                     Math.max(...this.data.data.map((item) =>
-                        item[sery.key] !== undefined ? item[sery.key] : -Infinity)))); // 支持空数据
+                        item[sery.key] !== undefined ? item[sery.key] : -Infinity)
+                    )
+                )); // 支持空数据
             }
 
             _yAxis.count = this.data.yAxis.count || 8;
