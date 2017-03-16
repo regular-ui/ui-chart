@@ -1,4 +1,4 @@
-<svg viewBox="0 0 100 100">
+<svg ref="svg" viewBox="0 0 100 100">
     <g transform="translate(50, 50)">
         {#list data as item}
         <path class="pieChart_item pieChart_item-{item.key} {current === item ? 'z-crt' : ''}"
@@ -7,4 +7,15 @@
         {/list}
     </g>
 </svg>
-<div class="pieChart_text">{#if this.$body}{#inc this.$body}{#else}{current ? current.percent + '%' : ''}{/if}</div>
+{#list data as item}
+<div class="pieChart_text" z-crt={current === item} style={this._getTextStyle(item)}>
+    {item ? item.percent + '%' : ''}
+    <div class="u-tooltip u-tooltip-right-top">
+        {#if tooltipTemplate}
+            {#inc tooltipTemplate}
+        {#else}
+            <div>{item.name || item.key}: {item.percent}%</div>
+        {/if}
+    </div>
+</div>
+{/list}

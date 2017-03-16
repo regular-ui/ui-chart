@@ -6,6 +6,8 @@ $m-pieChart_g_size = 120px;
 .m-pieChart {
     svg {
         $size: 100%;
+        display: block;
+        margin: 0 auto;
 
         > g {
             width: $m-pieChart_g_size;
@@ -28,9 +30,27 @@ $m-pieChart_g_size = 120px;
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translateX(-50%) translateY(-50%);
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
+        transform: translate(-50%, -50%);
+        color: white;
+        cursor: default;
+
+        .u-tooltip {
+            display: none;
+        }
+    }
+
+    .pieChart_text:hover {
+        z-index: 1;
+
+        .u-tooltip {
+            display: block;
+            position: absolute;
+            margin-left: 100%;
+            left: 8px;
+            top: 0;
+        }
     }
 }
 

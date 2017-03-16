@@ -11,7 +11,6 @@ import Chart from '../chart';
  * @param {string=''}               options.data.titleTemplate      @=> 标题模板
  * @param {string=''}               options.data.tooltipTemplate    @=> 工具提示模板
  * @param {Array}                   options.data.data                => 数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。
- * @param {Array=[]}                options.data.series              => 序列信息
  * @param {boolean=false}           options.data.border              => 是否显示边框
  * @param {boolean=true}            options.data.legend              => 是否显示图例
  * @param {boolean=true}            options.data.visible             => 是否显示
@@ -60,6 +59,19 @@ const PieChart = Chart.extend({
         d += ' L 0,0 Z';
 
         return d;
+    },
+    _getTextStyle(item) {
+        const middle = this._getPosition(item._pos + item.percent / 2);
+        const height = this.data.height.replace('px', '');
+        middle.x *= height / 100 / 2;
+        middle.y *= height / 100 / 2;
+
+        const result = [
+            'margin-left: ' + (middle.x) + 'px',
+            'margin-top: ' + (middle.y) + 'px',
+        ];
+
+        return result.join('; ');
     },
     _onMouseOver(item) {
         this.data.current = item;
