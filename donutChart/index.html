@@ -39,7 +39,7 @@
 <h3 id="基本形式">基本形式</h3>
 <div class="m-example"></div>
 
-<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">donutChart</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-attribute">series</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">donutChart</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
 </code></pre>
 <pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
     <span class="cm-property">template</span>,
@@ -177,7 +177,7 @@
 
 var index = 0;
 (function (index) {
-    var template = '<donutChart data={data} series={data} />';
+    var template = '<donutChart data={data} />';
     var component = new RGUI.Component({
         template: template,
         data: {

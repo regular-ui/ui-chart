@@ -60,6 +60,31 @@
     },
 });
 </code></pre>
+<h3 id="堆叠数据">堆叠数据</h3>
+<div class="m-example"></div>
+
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">barChart</span> <span class="cm-attribute">stack</span>
+    <span class="cm-attribute">xAxis</span>=<span class="cm-attribute">{@({</span> <span class="cm-attribute">key:</span> <span class="cm-stringcm-error">&#39;week&#39;</span> <span class="cm-attribute">})}</span>
+    <span class="cm-attribute">yAxis</span>=<span class="cm-attribute">{@({</span> <span class="cm-attribute">min:</span> <span class="cm-attribute">0</span> <span class="cm-attribute">})}</span>
+    <span class="cm-attribute">series</span>=<span class="cm-attribute">{@(series)}</span>
+    <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+</code></pre>
+<pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
+    <span class="cm-property">template</span>,
+    <span class="cm-property">data</span>: {
+        <span class="cm-property">series</span>: [{ <span class="cm-property">key</span>: <span class="cm-string">&#39;rds&#39;</span> }, { <span class="cm-property">key</span>: <span class="cm-string">&#39;ncr&#39;</span> }, { <span class="cm-property">key</span>: <span class="cm-string">&#39;nce&#39;</span> }],
+        <span class="cm-property">data</span>: [
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期一&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">150</span>, <span class="cm-property">ncr</span>: <span class="cm-number">200</span>, <span class="cm-property">nce</span>: <span class="cm-number">50</span> },
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期二&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">300</span>, <span class="cm-property">ncr</span>: <span class="cm-number">340</span>, <span class="cm-property">nce</span>: <span class="cm-number">20</span> },
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期三&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">28</span>, <span class="cm-property">ncr</span>: <span class="cm-number">56</span>, <span class="cm-property">nce</span>: <span class="cm-number">28</span> },
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期四&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">200</span>, <span class="cm-property">ncr</span>: <span class="cm-number">78</span>, <span class="cm-property">nce</span>: <span class="cm-number">40</span> },
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期五&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">74</span>, <span class="cm-property">ncr</span>: <span class="cm-number">100</span>, <span class="cm-property">nce</span>: <span class="cm-number">74</span> },
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期六&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">532</span>, <span class="cm-property">ncr</span>: <span class="cm-number">200</span>, <span class="cm-property">nce</span>: <span class="cm-number">32</span> },
+            { <span class="cm-property">week</span>: <span class="cm-string">&#39;星期日&#39;</span>, <span class="cm-property">rds</span>: <span class="cm-number">420</span>, <span class="cm-property">ncr</span>: <span class="cm-number">260</span>, <span class="cm-property">nce</span>: <span class="cm-number">20</span> },
+        ],
+    },
+});
+</code></pre>
 <h3 id="隐藏图例">隐藏图例</h3>
 <div class="m-example"></div>
 
@@ -204,6 +229,17 @@ var index = 0;
         template: template,
         data: {
             data: [{ week: '星期一', number: 150 }, { week: '星期二', number: 300 }, { week: '星期三', number: 28 }, { week: '星期四', number: 200 }, { week: '星期五', number: 74 }, { week: '星期六', number: 532 }, { week: '星期日', number: 420 }]
+        }
+    });
+    component && component.$inject($$(".m-example")[index]);
+})(index++);
+(function (index) {
+    var template = '<barChart stack\n    xAxis={@({ key: \'week\' })}\n    yAxis={@({ min: 0 })}\n    series={@(series)}\n    data={data} />';
+    var component = new RGUI.Component({
+        template: template,
+        data: {
+            series: [{ key: 'rds' }, { key: 'ncr' }, { key: 'nce' }],
+            data: [{ week: '星期一', rds: 150, ncr: 200, nce: 50 }, { week: '星期二', rds: 300, ncr: 340, nce: 20 }, { week: '星期三', rds: 28, ncr: 56, nce: 28 }, { week: '星期四', rds: 200, ncr: 78, nce: 40 }, { week: '星期五', rds: 74, ncr: 100, nce: 74 }, { week: '星期六', rds: 532, ncr: 200, nce: 32 }, { week: '星期日', rds: 420, ncr: 260, nce: 20 }]
         }
     });
     component && component.$inject($$(".m-example")[index]);

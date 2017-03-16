@@ -39,7 +39,7 @@
 <h3 id="基本形式">基本形式</h3>
 <div class="m-example"></div>
 
-<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">pieChart</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-attribute">series</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
+<pre class="lang-xml"><code><span class="cm-tagcm-bracket">&lt;</span><span class="cm-tag">pieChart</span> <span class="cm-attribute">data</span>=<span class="cm-attribute">{data}</span> <span class="cm-tagcm-bracketcm-error">/&gt;</span>
 </code></pre>
 <pre class="lang-javascript"><code><span class="cm-keyword">let</span> <span class="cm-variable">component</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">RGUI</span>.<span class="cm-property">Component</span>({
     <span class="cm-property">template</span>,
@@ -122,8 +122,6 @@
                 
                 <tr><td class="f-wsn"><code>data.data</code></td><td class="f-wsn">Array</td><td class="f-wsn"></td><td class="f-tac">outside  =&gt; inside</td><td>数据。如果为`undefined`，表示数据正在加载；如果为`[]`，表示数据为空。</td></tr>
                 
-                <tr><td class="f-wsn"><code>data.series</code></td><td class="f-wsn">Array</td><td class="f-wsn"><code>[]</code></td><td class="f-tac">outside  =&gt; inside</td><td>序列信息</td></tr>
-                
                 <tr><td class="f-wsn"><code>data.border</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>false</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示边框</td></tr>
                 
                 <tr><td class="f-wsn"><code>data.legend</code></td><td class="f-wsn">boolean</td><td class="f-wsn"><code>true</code></td><td class="f-tac">outside  =&gt; inside</td><td>是否显示图例</td></tr>
@@ -176,7 +174,7 @@
 
 var index = 0;
 (function (index) {
-    var template = '<pieChart data={data} series={data} />';
+    var template = '<pieChart data={data} />';
     var component = new RGUI.Component({
         template: template,
         data: {
