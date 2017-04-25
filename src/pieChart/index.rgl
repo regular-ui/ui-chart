@@ -1,9 +1,13 @@
 <svg ref="svg" viewBox="0 0 100 100">
     <g transform="translate(50, 50)">
         {#list data as item}
-        <path class="pieChart_item pieChart_item-{item.key} {current === item ? 'z-crt' : ''}"
-            d={this._getD(item)}
-            on-mouseover={this._onMouseOver(item)} />
+            {#if item.percent == 100}
+                <circle class="pieChart_item pieChart_item-{item.key} {current === item ? 'z-crt' : ''}" cx="0" cy="0" r={RADIUS}/>
+            {#else}
+                <path class="pieChart_item pieChart_item-{item.key} {current === item ? 'z-crt' : ''}"
+                    d={this._getD(item)}
+                    on-mouseover={this._onMouseOver(item)} />
+            {/if}
         {/list}
     </g>
 </svg>

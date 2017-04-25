@@ -37,7 +37,7 @@
         {#else}
             <div class="barChart_bar barChart_bar-stack" style="height: {100*(item.total - _yAxis.min)/_yAxis.max}%">
                 {#list series as sery}
-                <div class="barChart_bar barChart_bar-static" style="height: {100*(item[sery.key])/item.total}%"></div>
+                <div class="barChart_bar barChart_bar-static" style="height: {100*(item[sery.key])/item.total}%" r-hide={!item[sery.key]}></div>
                 {/list}
                 <div class="u-tooltip u-tooltip-right-top">
                     {#if tooltipTemplate}
