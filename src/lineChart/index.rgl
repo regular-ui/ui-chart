@@ -40,7 +40,9 @@
             </div>
             {/if}
         {/list}
-        <div class="u-tooltip u-tooltip-{item_index >= data.length/2 ? 'left-top' : 'right-top'}" style="top: {100*(_yAxis.max - this._getTopOne(item))/(_yAxis.max - _yAxis.min)}%;">
+        {__percent = 100*(_yAxis.max - this._getTopOne(item))/(_yAxis.max - _yAxis.min)}
+        <div class="u-tooltip u-tooltip-{item_index >= data.length/2 ? 'left' : 'right'}-{__percent < 50 ? 'top' : 'bottom'}"
+             style={__percent < 50 ? 'top: ' + __percent + '%' : 'bottom: ' + (100 - __percent) + '%'}>
             {#if tooltipTemplate}
                 {#inc tooltipTemplate}
             {#else}
