@@ -173,33 +173,59 @@ const LineChart = Chart.extend({
         const height = this.data._height;
         const delta = width / (this.data.data.length - 1) / 2;
 
-        const cmds = this.data.data.map((item, index) => {
-            const x = width * index / (this.data.data.length - 1);
-            const y = height * (1 - (item[sery.key] - this.data._yAxis.min) / (this.data._yAxis.max - this.data._yAxis.min));
-
-            if (isNaN(y)) // 处理空数据的情况
-                return '';
-            else if (!this.data.smooth)
-                return `L ${x},${y}`;
+        const points = this.data.data.map((item, index) => {
+            if (isNaN(item[sery.key])) // 处理空数据的情况
+                return null;
             else {
-                const x2 = x - delta;
-                return `S ${x2},${y} ${x},${y}`;
+                return [
+                    width * index / (this.data.data.length - 1),
+                    height * (1 - (item[sery.key] - this.data._yAxis.min) / (this.data._yAxis.max - this.data._yAxis.min)),
+                ];
             }
         });
+        points.push(null); // 起始点也可以看作间断结束，最后一个null看作间断开始
 
-        if (!this.data.smooth)
-            cmds[0] = 'M ' + cmds[0].slice(2);
-        else {
-            const [x, y] = cmds[0].split(' ')[2].split(',');
-            const x1 = x + delta;
-            cmds[0] = `M ${x},${y}`;
-            cmds[1] = `C ${x1},${y} ` + cmds[1].slice(2);
-        }
+        const cmds = [];
+        let discontinued = true;
+        for (let i = 0; i < points.length; i++) {
+            const point = points[i];
+            let cmd = '';
 
-        if (type === 'area') {
-            cmds.push('V ' + height);
-            cmds.push('H 0');
-            cmds.push('Z');
+            if (!point) {
+                if (!discontinued) {    // discontinue start
+                    discontinued = true;
+                    if (type === 'area')
+                        cmd = 'V ' + height;
+                }
+            } else {
+                const pointStr = point.join(',');
+                if (discontinued) {    // discontinue end
+                    discontinued = false;
+                    if (type !== 'area')
+                        cmd = 'M ' + pointStr;
+                    else {
+                        const bottomPointStr = [point[0], height].join(',');
+                        cmd = `M ${bottomPointStr} L ${pointStr}`;
+                    }
+
+                    const nextPoint = points[i + 1];
+                    if (this.data.smooth && nextPoint) {
+                        const helperPointStr = [point[0] + delta, point[1]].join(',');
+                        const nextHelperPointStr = [nextPoint[0] - delta, nextPoint[1]].join(',');
+                        cmd += ` C ${helperPointStr} ${nextHelperPointStr} ` + nextPoint.join(',');
+                        i++;
+                    }
+                } else {
+                    if (!this.data.smooth)
+                        cmd = 'L ' + pointStr;
+                    else {
+                        const helperPointStr = [point[0] - delta, point[1]].join(',');
+                        cmd = `S ${helperPointStr} ${pointStr}`;
+                    }
+                }
+            }
+
+            cmds.push(cmd);
         }
 
         return cmds.join(' ');
