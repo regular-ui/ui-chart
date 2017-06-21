@@ -93,20 +93,23 @@ const LineChart = Chart.extend({
             const _xAxis = this.data._xAxis;
             _xAxis.count = this.data.xAxis.count || 12;
             let pieceCounts = this.data.data.length - 1;
-            let tick = 1;
-            while (!(pieceCounts / tick <= _xAxis.count && pieceCounts % tick === 0)) {
-                for (let i = 0; i < TICKES.length; i++) {
-                    tick = TICKES[i];
-                    if (pieceCounts / tick <= _xAxis.count && pieceCounts % tick === 0)
-                        break;
-                }
+            let tick = pieceCounts / _xAxis.count;
+            if (tick !== parseInt(tick)) {
+                tick = 1;
+                while (!(pieceCounts / tick <= _xAxis.count && pieceCounts % tick === 0)) {
+                    for (let i = 0; i < TICKES.length; i++) {
+                        tick = TICKES[i];
+                        if (pieceCounts / tick <= _xAxis.count && pieceCounts % tick === 0)
+                            break;
+                    }
 
-                // 如果不能整除，则补充空数据
-                if (tick === 1) {
-                    this.data.data.push({ hidden: true });
-                    pieceCounts++;
-                } else
+                    // 如果不能整除，则补充空数据
+                    if (tick === 1) {
+                        this.data.data.push({ hidden: true });
+                        pieceCounts++;
+                    } else
                     break;
+                }
             }
 
             _xAxis.tick = tick;
