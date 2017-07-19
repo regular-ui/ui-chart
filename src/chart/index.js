@@ -30,6 +30,7 @@ const Chart = Component.extend({
             title: '',
             titleTemplate: '',
             contentTemplate: '',
+            legendTemplate: '',
             data: undefined,
             border: false,
             legend: true,

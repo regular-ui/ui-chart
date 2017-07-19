@@ -12,8 +12,9 @@
     {#if legend}
     <div class="chart_legend">
         {#list series as sery}
-        <div class="chart_legend_item chart_legend_item-{sery.key}" z-dis={sery.hidden} on-click={sery.hidden = !sery.hidden}>{sery.name || sery.key}</div>
+        <div class="chart_legend_item chart_legend_item-{sery.key}" z-dis={sery.hidden} title={sery.name || sery.key} on-click={sery.hidden = !sery.hidden}>{sery.name || sery.key}</div>
         {/list}
+        {#inc legendTemplate}
     </div>
     {/if}
     <div class="chart_ct" ref="content">
