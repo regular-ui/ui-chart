@@ -233,8 +233,9 @@ const LineChart = Chart.extend({
 
         return cmds.join(' ');
     },
+    // 需要特殊处理存在隐藏线和断点的tooltip显示的位置问题
     _getTopOne(item) {
-        return Math.max(...this.data.series.map((sery) => item[sery.key]));
+        return Math.max(...this.data.series.map((sery) => !sery.hidden && item[sery.key] ? item[sery.key] : 0));
     },
     format(value) {
         return value;
