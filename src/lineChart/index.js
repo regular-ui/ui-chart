@@ -125,21 +125,21 @@ const LineChart = Chart.extend({
             const _yAxis = this.data._yAxis;
 
             // 如果没有设置最小值和最大值，则寻找
-            if (this.data.yAxis.min !== undefined)
+            if (!isNaN(this.data.yAxis.min))
                 _yAxis.min = this.data.yAxis.min;
             else {
                 _yAxis.min = Math.min(...this.data.series.map((sery) =>
                     Math.min(...this.data.data.map((item) =>
-                        item[sery.key] !== undefined ? item[sery.key] : Infinity)
+                        !isNaN(item[sery.key]) ? item[sery.key] : Infinity)
                     )
                 )); // 支持空数据
             }
-            if (this.data.yAxis.max !== undefined)
+            if (!isNaN(this.data.yAxis.max))
                 _yAxis.max = this.data.yAxis.max;
             else {
                 _yAxis.max = Math.max(...this.data.series.map((sery) =>
                     Math.max(...this.data.data.map((item) =>
-                        item[sery.key] !== undefined ? item[sery.key] : -Infinity)
+                        !isNaN(item[sery.key]) ? item[sery.key] : -Infinity)
                     )
                 )); // 支持空数据
             }
@@ -235,7 +235,7 @@ const LineChart = Chart.extend({
     },
     // 需要特殊处理存在隐藏线和断点的tooltip显示的位置问题
     _getTopOne(item) {
-        return Math.max(...this.data.series.map((sery) => !sery.hidden && item[sery.key] ? item[sery.key] : 0));
+        return Math.max(...this.data.series.map((sery) => !sery.hidden && item[sery.key] ? item[sery.key] : -Infinity));
     },
     format(value) {
         return value;

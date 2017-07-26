@@ -80,22 +80,26 @@ const BarChart = Chart.extend({
             const _yAxis = this.data._yAxis;
 
             // 如果没有设置最小值和最大值，则寻找
-            if (this.data.yAxis.min !== undefined)
+            if (!isNaN(this.data.yAxis.min))
                 _yAxis.min = this.data.yAxis.min;
             else if (this.data.stack)
                 _yAxis.min = Math.min(...this.data.data.map((item) => item.total));
             else {
                 _yAxis.min = Math.min(...this.data.series.map((sery) =>
-                    Math.min(...this.data.data.map((item) => item[sery.key]))
+                    Math.min(...this.data.data.map((item) =>
+                        !isNaN(item[sery.key]) ? item[sery.key] : Infinity)
+                    )
                 ));
             }
-            if (this.data.yAxis.max !== undefined)
+            if (!isNaN(this.data.yAxis.max))
                 _yAxis.max = this.data.yAxis.max;
             else if (this.data.stack)
                 _yAxis.max = Math.max(...this.data.data.map((item) => item.total));
             else {
                 _yAxis.max = Math.max(...this.data.series.map((sery) =>
-                    Math.max(...this.data.data.map((item) => item[sery.key]))
+                    Math.max(...this.data.data.map((item) =>
+                        !isNaN(item[sery.key]) ? item[sery.key] : -Infinity)
+                    )
                 ));
             }
 
