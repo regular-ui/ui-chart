@@ -155,8 +155,10 @@ const LineChart = Chart.extend({
                 _yAxis.max = _yAxis.min + _yAxis.count;
 
             _yAxis.data = [];
-            for (let i = _yAxis.min; i <= _yAxis.max; i += tick)
-                _yAxis.data.push(i.toFixed(fixedCount)); // 防止+的时候出现无限小数的情况
+            for (let i = 0; i <= _yAxis.count; i++) {
+                const value = _yAxis.min + i * tick;
+                _yAxis.data.push(value.toFixed(fixedCount)); // 防止+的时候出现无限小数的情况
+            }
         }
 
         setTimeout(() => {
