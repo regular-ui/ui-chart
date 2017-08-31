@@ -156,7 +156,9 @@ const LineChart = Chart.extend({
 
             _yAxis.data = [];
             // 临时处理，可能会导致o.count大于预设的值
-            o.count = Math.ceil((_yAxis.max - _yAxis.min) /tick);
+            if (_yAxis.min + _yAxis.count * tick < _yAxis.max) {
+                o.count++;
+            }
             for (let i = 0; i <= _yAxis.count; i++) {
                 const value = _yAxis.min + i * tick;
                 _yAxis.data.push(value.toFixed(fixedCount)); // 防止+的时候出现无限小数的情况
