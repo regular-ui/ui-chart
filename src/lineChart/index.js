@@ -152,17 +152,20 @@ const LineChart = Chart.extend({
 
             // 如果最小值和最大值相等，则强行区分
             if (_yAxis.min === _yAxis.max)
-                _yAxis.max = _yAxis.min + _yAxis.count;
+                _yAxis.max = _yAxis.min + _yAxis.count * tick;
 
             _yAxis.data = [];
-            // 临时处理，可能会导致o.count大于预设的值
-            if (_yAxis.min + _yAxis.count * tick < _yAxis.max)
+
+            while (_yAxis.min + _yAxis.count * tick < _yAxis.max)
                 _yAxis.count++;
 
             for (let i = 0; i <= _yAxis.count; i++) {
                 const value = _yAxis.min + i * tick;
                 _yAxis.data.push(value.toFixed(fixedCount)); // 防止+的时候出现无限小数的情况
             }
+
+            const dataMax = Number(_yAxis.data[_yAxis.data.length - 1]);
+            _yAxis.max = Math.max(_yAxis.max, dataMax);
         }
 
         setTimeout(() => {
